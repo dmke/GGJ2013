@@ -3,29 +3,29 @@ module(..., package.seeall)
 local audio = require("audio")
 
 local handles = {
-  explosion     = { audio.loadSound("audio/explosion.mp3"),     0.25 },
-  death         = { audio.loadSound("audio/dogpoop_die.mp3"),   0.75 },
-  defibrillator = { audio.loadSound("audio/defibrillator.mp3"), 0.75 },
-  flatline      = { audio.loadSound("audio/flatline.mp3"),      0.75 },
-  jump          = { audio.loadSound("audio/jump.mp3"),          1.0 },
-  boost         = { audio.loadSound("audio/boost.mp3"),         1.0 },
-  brickStone    = { audio.loadSound("audio/brick_stone.mp3"),   1.0 },
-  cardboardBox  = { audio.loadSound("audio/cardboard_box.mp3"), 1.0 },
-  carCrash      = { audio.loadSound("audio/car_crash.mp3"),     1.0 },
-  powerDown     = { audio.loadSound("audio/powerdown.mp3"),     1.0 },
-  powerUp       = { audio.loadSound("audio/powerup.mp3"),       1.0 },
-  stoneBreak    = { audio.loadSound("audio/stone_break.mp3"),   1.0 },
-  trashcanA     = { audio.loadSound("audio/trashcan_a.mp3"),    1.0 },
-  trashcanB     = { audio.loadSound("audio/trashcan_b.mp3"),    1.0 },
-  woodBox       = { audio.loadSound("audio/wood_box.mp3"),      1.0 },
-  woodBreak     = { audio.loadSound("audio/wood_break.mp3"),    1.0 },
+  explosion     = audio.loadSound("audio/explosion.mp3"),
+  death         = audio.loadSound("audio/dogpoop_die.mp3"),
+  defibrillator = audio.loadSound("audio/defibrillator.mp3"),
+  flatline      = audio.loadSound("audio/flatline.mp3"),
+  jump          = audio.loadSound("audio/jump.mp3"),
+  boost         = audio.loadSound("audio/boost.mp3"),
+  brickStone    = audio.loadSound("audio/brick_stone.mp3"),
+  cardboardBox  = audio.loadSound("audio/cardboard_box.mp3"),
+  carCrash      = audio.loadSound("audio/car_crash.mp3"),
+  powerDown     = audio.loadSound("audio/powerdown.mp3"),
+  powerUp       = audio.loadSound("audio/powerup.mp3"),
+  stoneBreak    = audio.loadSound("audio/stone_break.mp3"),
+  trashcanA     = audio.loadSound("audio/trashcan_a.mp3"),
+  trashcanB     = audio.loadSound("audio/trashcan_b.mp3"),
+  woodBox       = audio.loadSound("audio/wood_box.mp3"),
+  woodBreak     = audio.loadSound("audio/wood_break.mp3"),
 
 
-  heartbeat = { audio.loadSound("audio/heartbeat.mp3"),         1.0 },
+  heartbeat = audio.loadSound("audio/heartbeat.mp3"),
   aggressor = {
-    { audio.loadSound("audio/music_loop_1.mp3"),                0.01 },
-    { audio.loadSound("audio/music_loop_2.mp3"),                0.01 },
-    { audio.loadSound("audio/music_loop_3.mp3"),                0.01 }
+    audio.loadSound("audio/music_loop_1.mp3"),
+    audio.loadSound("audio/music_loop_2.mp3"),
+    audio.loadSound("audio/music_loop_3.mp3")
   }
 }
 
@@ -43,8 +43,7 @@ end
 
 local function sfx(sample, cfg)
   audio.stop(cfg.ch)
-  setVolume(sample[2], cfg.ch)
-  audio.play(sample[1], { channel=cfg.ch })
+  audio.play(sample, { channel=cfg.ch })
 end
 
 local function startBackgroundMusic(theme)
@@ -54,8 +53,7 @@ local function startBackgroundMusic(theme)
     end
     if event == nil or event.completed then
       local sample = theme[math.random(#theme)]
-      setVolume(sample[2], config.bgMusic.ch)
-      _, config.bgMusic.src = audio.play(sample[1], { channel=config.bgMusic.ch, onComplete = playBackgroundMusic })
+      _, config.bgMusic.src = audio.play(sample, { channel=config.bgMusic.ch, onComplete = playBackgroundMusic })
 
       if config.bgMusic.pitch < 1.5 and math.random(100) > 25 then
         config.bgMusic.pitch = config.bgMusic.pitch + 0.1
@@ -68,8 +66,7 @@ local function startBackgroundMusic(theme)
   end
   local function playHeartbeat(event)
     if event == nil or event.completed then
-      setVolume(handles.heartbeat[2], config.bgHeart.ch)
-      _, config.bgHeart.src = audio.play(handles.heartbeat[1], { channel=config.bgHeart.ch, onComplete=playHeartbeat })
+      _, config.bgHeart.src = audio.play(handles.heartbeat, { channel=config.bgHeart.ch, onComplete=playHeartbeat })
     end
   end
 
