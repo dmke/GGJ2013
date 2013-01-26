@@ -23,7 +23,7 @@ end
 local crates = {}  
 for i = 1, 10, 1 do
 	crates[i] = display.newImage("images/laterne.png")
-	crates[i].x = 777 * i + math.random(250)
+	crates[i].x = 3777 * i + math.random(250)
 	crates[i].y = 40
 	crates[i].name = "dynamic"
 	physics.addBody( crates[i], "dynamic", { density = 1.0, friction = 0.9, bounce = 0} )
