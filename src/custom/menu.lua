@@ -21,24 +21,35 @@ local title = display.newImage("images/menu/title.png")
 title.x = 240
 title.y = 80
 local playButton = display.newImage("images/menu/playButton.png")
-playButton.x = 240
+playButton.x = 140
 playButton.y = 220
+
+local aboutButton = display.newImage("images/menu/aboutButton.png")
+aboutButton.x = 340
+aboutButton.y = 220
+
 menuDisplay:insert(background)
 menuDisplay:insert(title)
 menuDisplay:insert(playButton)
+menuDisplay:insert(aboutButton)
 --this is what gets called when playButton gets touched
 --the only thing that is does is call the transition
 --from this scene to the game scene, "downFlip" is the
 --name of the transition that the director uses
-local function buttonListener( event )
-director:changeScene( "game", "fade" )
+local function playButtonListener( event )
+	director:changeScene( "game", "fade" )
+return true
+end
+local function aboutButtonListener( event )
+	director:changeScene( "about", "fade" )
 return true
 end
     --this is a little bit different way to detect touch, but it works
     --well for buttons. Simply add the eventListener to the display object
     --that is the button send the event "touch", which will call the function
     --buttonListener everytime the displayObject is touched.
-	playButton:addEventListener("touch", buttonListener )
+	playButton:addEventListener("touch", playButtonListener )
+	aboutButton:addEventListener("touch", aboutButtonListener )
         --return the display group at the end
     return menuDisplay
 end
