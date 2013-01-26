@@ -1,6 +1,5 @@
 --We will use sprite as a 'sprite handler' to create spritesheets
 local sprite = require("sprite")
-require("myBackground")
 --creating a new spritesheet will break the image you put into even blocks that are 100
 --by 100, change those parameters to whatever size your images are. Note that this method
 --of sprite creation only works for sprites that are the same size. There are other methods
@@ -22,7 +21,7 @@ sprite.add(monsterSet, "jumping", 7, 7, 1, 1)
 hero = sprite.newSprite(monsterSet)
 
 --physics.addBody( hero, { friction=0.5 } )
-physics.addBody( hero, { density = 1.0, friction = 0.3, bounce = 0.2, radius = 25 } )
+physics.addBody( hero, { density = 1.0, friction = 0.2, bounce = 0.2, radius = 25 } )
 hero.isFixedRotation = true
 
 --use prepare to let the sprite know which animation it is going to use
@@ -52,8 +51,6 @@ function touched( event )
 end
 Runtime:addEventListener("touch", touched, -1)
 
-function update()
+function updateHero()
 	hero:applyForce( 8, 0, hero.x, hero.y )
 end
-
-timer.performWithDelay(1, update, -1)
