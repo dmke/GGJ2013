@@ -31,7 +31,7 @@ hero.isFixedRotation = true
 hero:prepare("running")
 --calling play will start the loaded animation
 hero:play()
-blocks:insert(hero)
+game.blocks:insert(hero)
 --this is the function that handles the jump events. If the screen is touched on the left side
 --then make the monster jump
 function touched( event )
