@@ -1,5 +1,10 @@
 --We will use sprite as a 'sprite handler' to create spritesheets
 local sprite = require("sprite")
+<<<<<<< HEAD
+=======
+local player = require("audioPlayer")
+require("myBackground")
+>>>>>>> added first iteration of audio playback mechanism
 --creating a new spritesheet will break the image you put into even blocks that are 100
 --by 100, change those parameters to whatever size your images are. Note that this method
 --of sprite creation only works for sprites that are the same size. There are other methods
@@ -39,13 +44,15 @@ function touched( event )
               	hero:applyForce( 0, -200, hero.x, hero.y )
               	hero:prepare("jumping")
 				        hero:play()
+                player.explosion()
           end
           if(event.x <= 241) then
-              	print("TOUCHED")
-              	--step back
-              	hero:applyForce( -200, 0, hero.x, hero.y )
-              	hero:prepare("jumping")
-				        hero:play()
+                print("TOUCHED")
+                --step back
+                hero:applyForce( -200, 0, hero.x, hero.y )
+                hero:prepare("jumping")
+                hero:play()
+                player.stopBackgroundMusic()
           end
      end
 end

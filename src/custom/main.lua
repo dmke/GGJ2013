@@ -1,9 +1,12 @@
 display.setStatusBar(display.HiddenStatusBar)
 
 local physics = require("physics")
---local media = require("media")
 physics.start()
 physics.setDrawMode("hybrid") -- overlays collision outlines on normal Corona objects
+
+--start background music
+local player = require("audioPlayer")
+player.aggressor()
 
 --setup some variables that we will use to position the ground
 groundMin = 420
@@ -14,6 +17,7 @@ speed = 5;
 --create a new group to hold all of our physics objects
 blocks = display.newGroup()
 
+
 require("myBackground")
 require("hearty")
 require("myObstacles")
@@ -22,10 +26,10 @@ function mainLoop()
 	updateHero()
 	local speed = hero:getLinearVelocity()
 	--print("speed " .. speed)
-	
+
 	updateMyBackground(speed/10)
-		
-	blocks.x = -hero.x + display.viewableContentWidth/3 
+
+	blocks.x = -hero.x + display.viewableContentWidth/3
 end
 
 
