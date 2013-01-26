@@ -8,7 +8,8 @@ new = function( params )
 
 local physics = require("physics")
 physics.start()
-physics.setDrawMode("hybrid") -- overlays collision outlines on normal Corona objects
+physics.setGravity(0, 25)
+physics.setDrawMode("normal") -- overlays collision outlines on normal Corona objects
 
 --start background music
 local player = require("audioPlayer")
@@ -19,7 +20,7 @@ groundMin = 420
 groundMax = 340
 groundLevel = groundMin
 speed = 5;
-maxHealth = 10
+maxHealth = 15
 health = maxHealth
 time = 0
 alive = true

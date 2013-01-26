@@ -22,10 +22,10 @@ local monsterSet = sprite.newSpriteSet(spriteSheet, 1, 48)
 --animation to run for. 0 will make it run until we tell the animtion to stop
 sprite.add(monsterSet, "running", 1, 8, 500, 0)
 sprite.add(monsterSet, "jumping", 9, 11, 1, 1)
-sprite.add(monsterSet, "dieing", 25, 48, 500, 1)
+sprite.add(monsterSet, "dieing", 25, 48, 200, 3)
 --the last step is to make a sprite out of our sprite set that holds all of the animtions
 hero = sprite.newSprite(monsterSet)
-physics.addBody( hero, { density = 1.0, friction = 0.1, bounce = 0.2, radius = 35 } )
+physics.addBody( hero, { density = 1.0, friction = 0.0, bounce = 0.2, radius = 35 } )
 hero.isFixedRotation = true
 
 local function onLocalCollision( self, event )  
@@ -42,11 +42,7 @@ local function onLocalCollision( self, event )
     end  
     if ( event.phase == "began" and event.other.name and event.other.name == "ground") then  
         print("-> RUN")
-        if(activity ~= "running") then
-            activity = "running"
-       	 	--hero:prepare("running")
-			--hero:play()  
-        end    
+        hero:play()
     end  
 end  
 hero.collision = onLocalCollision  
@@ -63,22 +59,24 @@ game.blocks:insert(hero)
 --this is the function that handles the jump events. If the screen is touched on the left side
 --then make the monster jump
 function touched( event )
-	if(game.alive) then
-	     if(event.phase == "began") then
-	          if(event.x > 241) then
-	              	-- jump
-	              	hero:applyForce( -10, -800, hero.x, hero.y )
-	              	--hero:prepare("jumping")
-					--hero:play()
-	                player.explosion()
-	          end
-	          if(event.x <= 241) then
-	                --move down
-	                hero:applyForce( 0, 400, hero.x, hero.y )
-	                player.stopBackgroundMusic()
-	          end
-	     end
-	end
+    if(event.phase == "began") then
+        if(event.x > 241) then
+            print("TOUCHED")
+            -- jump
+            hero:applyForce( 0, -1600, hero.x, hero.y )
+            --hero:prepare("jumping")
+            hero:pause()
+            player.jump()
+        end
+        if(event.x <= 241) then
+            print("TOUCHED")
+            --step back
+            hero:applyForce( 0, 400, hero.x, hero.y )
+            --hero:prepare("jumping")
+            --hero:play()
+            player.stopBackgroundMusic()
+        end
+     end
 end
 Runtime:addEventListener("touch", touched, -1)
 
