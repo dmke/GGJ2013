@@ -21,7 +21,7 @@ groundLevel = groundMin
 speed = 5;
 score = 0
 
-local scoreText = display.newText("score: " .. score, 0, 0, "Arial", 50)
+local scoreText = display.newText("score: " .. score, 0, 0, "badaboom", 50)
 scoreText:setReferencePoint(display.CenterLeftReferencePoint)
 scoreText.x = 0
 scoreText.y = 30
