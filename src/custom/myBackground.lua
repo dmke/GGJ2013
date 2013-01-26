@@ -15,8 +15,6 @@ local backbackground = display.newImage("images/background.png")
 backbackground.x = 240
 backbackground.y = 160
 
-
-
 --this for loop will generate all of your ground pieces, we are going to
 --make 8 in all.
 local numBlocks = 800
@@ -47,9 +45,7 @@ for a = 1, numBlocks, 1 do
 	--now that we have the right image for the block we are going
 	--to give it some member variables that will help us keep track
 	--of each block as well as position them where we want them.
-	blockArray[a].name = ("block" .. a)
-	blockArray[a].id = a
-
+	blockArray[a].name = ("ground")
 	--because a is a variable that is being changed each run we can assign
 	--values to the block based on a. In this case we want the x position to
 	--be positioned the width of a block apart.
