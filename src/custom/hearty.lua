@@ -1,5 +1,8 @@
 --We will use sprite as a 'sprite handler' to create spritesheets
 local sprite = require("sprite")
+local player = require("audioPlayer")
+require("myBackground")
+
 --creating a new spritesheet will break the image you put into even blocks that are 100
 --by 100, change those parameters to whatever size your images are. Note that this method
 --of sprite creation only works for sprites that are the same size. There are other methods
@@ -39,7 +42,7 @@ hero:addEventListener( "collision", hero )
 hero:prepare("running")
 --calling play will start the loaded animation
 hero:play()
-blocks:insert(hero)
+game.blocks:insert(hero)
 --this is the function that handles the jump events. If the screen is touched on the left side
 --then make the monster jump
 function touched( event )
@@ -50,13 +53,15 @@ function touched( event )
               	hero:applyForce( 0, -400, hero.x, hero.y )
               	hero:prepare("jumping")
 				hero:play()
+                player.explosion()
           end
           if(event.x <= 241) then
-              	print("TOUCHED")
-              	--step back
-              	hero:applyForce( 0, 400, hero.x, hero.y )
-              	hero:prepare("jumping")
-				hero:play()
+                print("TOUCHED")
+                --step back
+                hero:applyForce( 0, 400, hero.x, hero.y )
+                hero:prepare("jumping")
+                hero:play()
+                player.stopBackgroundMusic()
           end
      end
 end

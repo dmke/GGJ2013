@@ -53,8 +53,8 @@ for a = 1, 800, 1 do
 	--values to the block based on a. In this case we want the x position to
 	--be positioned the width of a block apart.
 	newBlock.x = (a * 79) - 79
-	newBlock.y = groundLevel
-	blocks:insert(newBlock)
+	newBlock.y = game.groundLevel
+	game.blocks:insert(newBlock)
 end
 
 --the update function will control most everything that happens in our game
