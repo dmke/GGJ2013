@@ -20,7 +20,7 @@ require("myObstacles")
 
 function mainLoop()
 	updateHero()
-	local speed = hero:getLinearVelocity()
+	speed = hero:getLinearVelocity()
 	--print("speed " .. speed)
 	
 	updateMyBackground(speed/10)

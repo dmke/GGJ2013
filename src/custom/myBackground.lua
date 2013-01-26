@@ -1,5 +1,4 @@
---takes away the display bar at the top of the screen
-display.setStatusBar(display.HiddenStatusBar)
+
 --adds an image to our game centered at x and y coordinates
 local backbackground = display.newImage("images/background.png")
 backbackground.x = 240
@@ -17,6 +16,8 @@ local backgroundnear2 = display.newImage("images/bgnear2.png")
 backgroundnear2.x = 760
 backgroundnear2.y = 160
 
+
+
 --this for loop will generate all of your ground pieces, we are going to
 --make 8 in all.
 for a = 1, 800, 1 do
@@ -32,13 +33,13 @@ for a = 1, 800, 1 do
 	print (numGen)
 	if(numGen == 1 and isDone == false) then
 		newBlock = display.newImage("images/ground1.png")
-		physics.addBody( newBlock, "static", { friction=0.5 } )
+		physics.addBody( newBlock, "static", { friction=0.0 } )
 		isDone = true
 	end
 
 	if(numGen == 2 and isDone == false) then
 		newBlock = display.newImage("images/ground2.png")
-		physics.addBody( newBlock, "static", { friction=0.5 } )
+		physics.addBody( newBlock, "static", { friction=0.0 } )
 		isDone = true
 	end
 
@@ -73,4 +74,12 @@ function updateMyBackground(speed)
 	if(backgroundnear2.x < -239) then
 		backgroundnear2.x = 760
 	end
+	--print("x: " .. ground.x)
+	--for a = 1, blocks.numChildren, 1 do
+    -- 	if(a > 1) then
+     --      	newX = (blocks[a - 1]).x + 79
+     -- 	else
+      --     	newX = (blocks[8]).x + 79 - speed
+      --	end
+	--end
 end
