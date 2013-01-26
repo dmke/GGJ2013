@@ -6,11 +6,6 @@ new = function( params )
 
 
 
-
-
-
-display.setStatusBar(display.HiddenStatusBar)
-
 local physics = require("physics")
 physics.start()
 physics.setDrawMode("hybrid") -- overlays collision outlines on normal Corona objects
@@ -24,6 +19,14 @@ groundMin = 420
 groundMax = 340
 groundLevel = groundMin
 speed = 5;
+score = 0
+
+local scoreText = display.newText("score: " .. score, 0, 0, "Arial", 50)
+scoreText:setReferencePoint(display.CenterLeftReferencePoint)
+scoreText.x = 0
+scoreText.y = 30
+
+
 
 --create a new group to hold all of our physics objects
 blocks = display.newGroup()
@@ -38,9 +41,15 @@ function mainLoop()
 	local speed = hero:getLinearVelocity()
 	--print("speed " .. speed)
 
+			scoreText.text = "score: " .. score
+			scoreText:setReferencePoint(display.CenterLeftReferencePoint)
+			scoreText.x = 0
+			scoreText.y = 30
+			
 	updateMyBackground(speed/10)
-
-	blocks.x = -hero.x + display.viewableContentWidth/3
+	blocks.x = -hero.x + 80
+	
+	
 end
 
 
