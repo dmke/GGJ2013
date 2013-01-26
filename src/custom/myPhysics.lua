@@ -50,14 +50,14 @@ end
 
 local function setBomb ( event )
 	if(event.phase == "began") then
-		local bomb = display.newImage( "images/bomb.png", event.x,event.y )
+		local bomb = display.newImage( "images/bomb.png", event.x, event.y )
 		physics.addBody( bomb, { density=0.2, friction=0.1, bounce=0.5 } )
 
 		local circle = ""
 		local explosion = ""
 		local function blast( event )
 			media.playEventSound( explosionSound )
-		    circle = display.newCircle( bomb.x, bomb.y, 80 )
+	    circle = display.newCircle( bomb.x, bomb.y, 80 )
 			explosion = display.newImage( "images/explosion.png", bomb.x, bomb.y )
 			bomb:removeSelf()
 			circle:setFillColor(0,0,0, 0)

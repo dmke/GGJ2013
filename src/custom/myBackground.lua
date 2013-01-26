@@ -96,23 +96,6 @@ function updateBlocks()
 	end
 end
 
-
-function updateBlocks()
-	for a = 1, blocks.numChildren, 1 do
-		if(a > 1) then
-			newX = (blocks[a - 1]).x + 79
-		else
-			newX = (blocks[8]).x + 79 - speed
-		end
-
-		if((blocks[a]).x < -40) then
-			(blocks[a]).x, (blocks[a]).y = newX, (blocks[a]).y
-		else
-			(blocks[a]):translate(speed * -1, 0)
-		end
-	end
-end
-
 function updateBackgrounds()
 	--far background movement
 	backgroundfar.x = backgroundfar.x - (speed/55)
