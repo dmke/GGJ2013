@@ -1,0 +1,20 @@
+settings = {
+     orientation = {
+          default = "landscapeRight",
+          content = "landscapeRight",
+          supported = {
+               "landscapeRight"
+          },
+     },
+     --adds the font BorisBlackBloxx.ttf to our game
+     --you will still need to reference the name in the
+     --code, but if you don't have it referenced here it
+     --will not work
+     iphone = {
+          plist = {
+                UIAppFonts = {
+                    "BorisBlackBloxx.ttf"
+               }
+          },
+     },
+}
