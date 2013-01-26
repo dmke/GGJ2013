@@ -45,7 +45,7 @@ for a = 1, numBlocks, 1 do
 	--now that we have the right image for the block we are going
 	--to give it some member variables that will help us keep track
 	--of each block as well as position them where we want them.
-	blockArray[a].name = ("ground")
+	blockArray[a].name = ("static")
 	--because a is a variable that is being changed each run we can assign
 	--values to the block based on a. In this case we want the x position to
 	--be positioned the width of a block apart.

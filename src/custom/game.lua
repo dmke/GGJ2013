@@ -9,7 +9,7 @@ new = function( params )
 local physics = require("physics")
 physics.start()
 physics.setGravity(0, 25)
-physics.setDrawMode("normal") -- overlays collision outlines on normal Corona objects
+physics.setDrawMode("hybrid") -- overlays collision outlines on normal Corona objects
 
 --start background music
 local player = require("audioPlayer")
@@ -18,7 +18,7 @@ player.aggressor()
 --setup some variables that we will use to position the ground
 groundLevel = 720
 speed = 5;
-maxHealth = 15
+maxHealth = 30
 health = maxHealth
 time = 0
 alive = true
@@ -67,7 +67,7 @@ local function winConditionCheck( event )
     	--print("dead")
     elseif(health < 1) then  -- GAME OVER
     	alive = false
-    	scoreText.text = "You loose"
+    	--scoreText.text = "You loose"
     	hero:prepare("dieing")
 		hero:play()
     end

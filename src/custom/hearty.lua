@@ -25,28 +25,31 @@ sprite.add(monsterSet, "jumping", 9, 11, 6, 0)
 sprite.add(monsterSet, "dieing", 25, 48, 50, -1)
 --the last step is to make a sprite out of our sprite set that holds all of the animtions
 hero = sprite.newSprite(monsterSet)
-physics.addBody( hero, { density = 1.0, friction = 0.0, bounce = 0.2, radius = 35 } )
+physics.addBody( hero, { density = 1.0, friction = 0.01, bounce = 0.2, radius = 35 } )
 hero.isFixedRotation = true
 
-local function onLocalCollision( self, event )  
-    if ( event.phase == "began" and event.other.name and event.other.name == "power_up") then  
+local function onLocalCollision( self, event )
+    if ( event.phase == "began" and event.other.name and event.other.name == "power_up") then
         --print("-> TRIGGER")
-        event.other:removeSelf()  
-        if(game.health < maxHealth) then
+        event.other:removeSelf()
+        player.powerUp()
+        if(game.health < game.maxHealth) then
         	game.health = game.health + 1
         end
-    end  
-    if ( event.phase == "ended" and event.other.name and event.other.name == "static") then  
+    end
+    if ( event.phase == "ended" and event.other.name and event.other.name == "dynamic") then
         --print("-> TRIGGER")
         --physics.removeBody(event.other)        
-    end  
-    if ( event.phase == "began" and event.other.name and event.other.name == "ground") then  
         print("-> RUN")
         hero:play()
-    end  
-end  
-hero.collision = onLocalCollision  
-hero:addEventListener( "collision", hero )  
+	end  
+    if ( event.phase == "began" and event.other.name and event.other.name == "static") then  
+        print("-> RUN")
+        hero:play()
+    end
+end
+hero.collision = onLocalCollision
+hero:addEventListener( "collision", hero )
 
 --use prepare to let the sprite know which animation it is going to use
 hero:prepare("running")
@@ -83,6 +86,6 @@ Runtime:addEventListener("touch", touched, -1)
 
 function updateHero()
 	if(game.alive) then
-		hero:applyForce( 6, 0, hero.x, hero.y )
+		hero:applyForce( 16, 0, hero.x, hero.y )
 	end
 end
