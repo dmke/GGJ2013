@@ -5,10 +5,9 @@ local audio = require("audio")
 local handles = {
   explosion = audio.loadSound("audio/explosion.mp3"),
   aggressor = {
-    [1] = audio.loadSound("audio/Aggressor - Looped Section1.wav"),
-    [2] = audio.loadSound("audio/Aggressor - Looped Section2.wav"),
-    [3] = audio.loadSound("audio/Aggressor - Looped Section3.wav"),
-    [4] = audio.loadSound("audio/Aggressor - Looped Section4.wav")
+    audio.loadSound("audio/Aggressor - Looped Section1.wav"),
+    audio.loadSound("audio/Aggressor - Looped Section2.wav"),
+    audio.loadSound("audio/Aggressor - Looped Section4.wav")
   }
 }
 
