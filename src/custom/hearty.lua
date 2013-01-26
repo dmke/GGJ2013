@@ -20,9 +20,9 @@ local monsterSet = sprite.newSpriteSet(spriteSheet, 1, 48)
 --frame and the number of frames in the animation, the number of milliseconds
 --we want 1 animation to take, and finally the number of times we want the
 --animation to run for. 0 will make it run until we tell the animtion to stop
-sprite.add(monsterSet, "running", 1, 8, 500, 0)
-sprite.add(monsterSet, "jumping", 9, 11, 1, 1)
-sprite.add(monsterSet, "dieing", 25, 48, 200, 3)
+sprite.add(monsterSet, "running", 1, 8, 16, 0)
+sprite.add(monsterSet, "jumping", 9, 11, 6, 0)
+sprite.add(monsterSet, "dieing", 25, 48, 50, -1)
 --the last step is to make a sprite out of our sprite set that holds all of the animtions
 hero = sprite.newSprite(monsterSet)
 physics.addBody( hero, { density = 1.0, friction = 0.0, bounce = 0.2, radius = 35 } )

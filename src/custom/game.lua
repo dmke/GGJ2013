@@ -16,9 +16,7 @@ local player = require("audioPlayer")
 player.aggressor()
 
 --setup some variables that we will use to position the ground
-groundMin = 420
-groundMax = 340
-groundLevel = groundMin
+groundLevel = 720
 speed = 5;
 maxHealth = 15
 health = maxHealth
