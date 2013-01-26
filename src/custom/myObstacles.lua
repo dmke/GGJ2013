@@ -1,27 +1,20 @@
 -- moving obstacles
-for a = 1, 80, 1 do
-	crate = display.newImage("images/crate.png")
-	crate.x = 500 * a + math.random(100)
-	crate.y = 200
-	crate.name = "power_up"
-	physics.addBody( crate, { density = 0.2, friction = 0.0, bounce = 0.5} )
-	game.blocks:insert(crate)
+local crates = {}  
+for i = 1, 80, 1 do
+	crates[i] = display.newImage("images/crate.png")
+	crates[i].x = 500 * i + math.random(100)
+	crates[i].y = 200
+	crates[i].name = "power_up"
+	physics.addBody( crates[i], { density = 0.0, friction = 0.0, bounce = 0, radius = 10} )
+	game.blocks:insert(crates[i])
 end
 -- static obstacles
 local crates = {}  
 for i = 1, 50, 1 do
 	crates[i] = display.newImage("images/crate.png")
-	crates[i].x = 800 * i + math.random(100)
-	crates[i].y = math.random(game.groundLevel)
+	crates[i].x = 1000 * i + math.random(100)
+	crates[i].y = game.groundLevel - 150
 	crates[i].name = "static"
-	physics.addBody( crates[i], "static", { density = 0.2, friction = 0.0, bounce = 0.1} )
+	physics.addBody( crates[i], "dynamic", { density = 1.0, friction = 1.2, bounce = 0} )
 	game.blocks:insert(crates[i])
-end
-
-function updateObstacles()
-	for i = 1, 1, 1 do
-		if(crates[i].x > 0) then
-			print("lower x " .. crates[i].x)
-		end	
-	end
 end
