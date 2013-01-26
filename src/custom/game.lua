@@ -20,7 +20,7 @@ groundMin = 420
 groundMax = 340
 groundLevel = groundMin
 speed = 5;
-maxHealth = 15
+maxHealth = 30
 health = maxHealth
 time = 0
 alive = true
@@ -69,7 +69,7 @@ local function winConditionCheck( event )
     	--print("dead")
     elseif(health < 1) then  -- GAME OVER
     	alive = false
-    	scoreText.text = "You loose"
+    	--scoreText.text = "You loose"
     	hero:prepare("dieing")
 		hero:play()
     end
