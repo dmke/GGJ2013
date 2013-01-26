@@ -19,6 +19,7 @@ local function onLocalCollision( self, event )
         print("-> TRIGGER")
         event.other:removeSelf()
         game.score = game.score + 1
+        player.powerUp()
     end
     if ( event.phase == "ended" and event.other.name and event.other.name == "static") then
         print("-> TRIGGER")

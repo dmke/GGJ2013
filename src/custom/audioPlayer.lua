@@ -4,16 +4,28 @@ local audio = require("audio")
 
 local handles = {
   explosion     = { audio.loadSound("audio/explosion.mp3"),     0.25 },
-  death         = { audio.loadSound("audio/death.mp3"),         0.75 },
+  death         = { audio.loadSound("audio/dogpoop_die.mp3"),   0.75 },
   defibrillator = { audio.loadSound("audio/defibrillator.mp3"), 0.75 },
   flatline      = { audio.loadSound("audio/flatline.mp3"),      0.75 },
   jump          = { audio.loadSound("audio/jump.mp3"),          1.0 },
+  boost         = { audio.loadSound("audio/boost.mp3"),         1.0 },
+  brickStone    = { audio.loadSound("audio/brick_stone.mp3"),   1.0 },
+  cardboardBox  = { audio.loadSound("audio/cardboard_box.mp3"), 1.0 },
+  carCrash      = { audio.loadSound("audio/car_crash.mp3"),     1.0 },
+  powerDown     = { audio.loadSound("audio/powerdown.mp3"),     1.0 },
+  powerUp       = { audio.loadSound("audio/powerup.mp3"),       1.0 },
+  stoneBreak    = { audio.loadSound("audio/stone_break.mp3"),   1.0 },
+  trashcanA     = { audio.loadSound("audio/trashcan_a.mp3"),    1.0 },
+  trashcanB     = { audio.loadSound("audio/trashcan_b.mp3"),    1.0 },
+  woodBox       = { audio.loadSound("audio/wood_box.mp3"),      1.0 },
+  woodBreak     = { audio.loadSound("audio/wood_break.mp3"),    1.0 },
+
 
   heartbeat = { audio.loadSound("audio/heartbeat.mp3"),         1.0 },
   aggressor = {
-    { audio.loadSound("audio/Aggressor - Looped Section1.mp3"), 0.01 },
-    { audio.loadSound("audio/Aggressor - Looped Section2.mp3"), 0.01 },
-    { audio.loadSound("audio/Aggressor - Looped Section3.mp3"), 0.01 }
+    { audio.loadSound("audio/music_loop_1.mp3"),                0.01 },
+    { audio.loadSound("audio/music_loop_2.mp3"),                0.01 },
+    { audio.loadSound("audio/music_loop_3.mp3"),                0.01 }
   }
 }
 
@@ -89,13 +101,12 @@ function aggressor()
   startBackgroundMusic(handles.aggressor)
 end
 
-
 function explosion()
   sfx(handles.explosion, config.character)
 end
 
 function death()
-  sfx(handles.death, config.powerUp)
+  sfx(handles.death, config.character)
 end
 
 function defibrillator()
@@ -103,10 +114,54 @@ function defibrillator()
 end
 
 function flatline()
-  sfx(handles.flatline, config.powerUp)
+  sfx(handles.flatline, config.character)
 end
 
 function jump()
-  sfx(handles.jump, config.atmo)
+  sfx(handles.jump, config.character)
+end
+
+function boost()
+  sfx(handles.boost, config.character)
+end
+
+function brickStone()
+  sfx(handles.brickStone, config.powerUp)
+end
+
+function cardboardBox()
+  sfx(handles.cardboardBox, config.powerUp)
+end
+
+function carCrash()
+  sfx(handles.carCrash, config.powerUp)
+end
+
+function powerDown()
+  sfx(handles.powerDown, config.powerUp)
+end
+
+function powerUp()
+  sfx(handles.powerUp, config.powerUp)
+end
+
+function stoneBreak()
+  sfx(handles.stone_break, config.powerUp)
+end
+
+function woodBox()
+  sfx(handles.woodBox, config.powerUp)
+end
+
+function woodBreak()
+  sfx(handles.woodBreak, config.powerUp)
+end
+
+function trashcan()
+  if math.random(100) > 50 then
+    sfx(handles.trashcanA, config.powerUp)
+  else
+    sfx(handles.trashcanB, config.powerUp)
+  end
 end
 
