@@ -8,7 +8,8 @@ new = function( params )
 
 local physics = require("physics")
 physics.start()
-physics.setDrawMode("hybrid") -- overlays collision outlines on normal Corona objects
+physics.setGravity(0, 25)
+physics.setDrawMode("normal") -- overlays collision outlines on normal Corona objects
 
 --start background music
 local player = require("audioPlayer")
@@ -45,11 +46,11 @@ function mainLoop()
 			scoreText:setReferencePoint(display.CenterLeftReferencePoint)
 			scoreText.x = 0
 			scoreText.y = 30
-			
+
 	updateMyBackground(speed/10)
 	blocks.x = -hero.x + 80
-	
-	
+
+
 end
 
 
