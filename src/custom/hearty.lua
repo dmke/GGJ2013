@@ -31,7 +31,7 @@ local function onLocalCollision( self, event )
         event.other:removeSelf()
         game.score = game.score + 1
     end
-    if ( event.phase == "ended" and event.other.name and event.other.name == "static") then
+    if ( event.phase == "ended" and event.other.name and event.other.name == "dynamic") then
         print("-> TRIGGER")
         player.death()
         --physics.removeBody(event.other)
