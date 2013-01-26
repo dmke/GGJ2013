@@ -74,10 +74,14 @@ function stopBackgroundMusic()
   local vol = audio.getVolume(config.bgMusic.ch)
   local t = 2000
 
-  audio.fadeOut({ channel=config.bgMusic.ch, time = t })
-  timer.performWithDelay(t, function(e)
+  audio.fadeOut({ channel=config.bgMusic.ch, time=t })
+  audio.fadeOut({ channel=config.bgHeart.ch, time=t })
+
+  timer.performWithDelay(t+200, function(e)
     audio.stop(config.bgMusic.ch)
+    audio.stop(config.bgHeart.ch)
     setVolume(vol, config.bgMusic.ch)
+    setVolume(vol, config.bgHeart.ch)
   end)
 end
 
