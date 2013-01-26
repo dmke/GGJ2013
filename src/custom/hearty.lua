@@ -39,14 +39,14 @@ function touched( event )
               	-- jump
               	hero:applyForce( 0, -200, hero.x, hero.y )
               	hero:prepare("jumping")
-				hero:play()
+				        hero:play()
           end
           if(event.x <= 241) then
               	print("TOUCHED")
               	--step back
               	hero:applyForce( -200, 0, hero.x, hero.y )
               	hero:prepare("jumping")
-				hero:play()
+				        hero:play()
           end
      end
 end

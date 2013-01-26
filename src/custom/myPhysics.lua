@@ -1,9 +1,9 @@
--- 
+--
 -- Abstract: Bullet sample project
 -- Demonstrates "isBullet" attribute for continuous collision detection
--- 
+--
 -- Version: 1.1 (revised for Alpha 2)
--- 
+--
 -- Sample code is MIT licensed, see http://developer.anscamobile.com/code/license
 -- Copyright (C) 2010 ANSCA Inc. All Rights Reserved.
 
@@ -16,7 +16,7 @@ physics.setDrawMode( "hybrid" ) -- overlays collision outlines on normal Corona 
 
 
 -- The final "true" parameter overrides Corona's auto-scaling of large images
-local background = display.newImage( "bricks.png", 0, 0, true )
+local background = display.newImage( "images/bricks.png", 0, 0, true )
 background.x = display.contentWidth / 2
 background.y = display.contentHeight / 2
 
@@ -52,7 +52,7 @@ local function setBomb ( event )
 	if(event.phase == "began") then
 		local bomb = display.newImage( "bomb.png", event.x,event.y )
 		physics.addBody( bomb, { density=0.2, friction=0.1, bounce=0.5 } )
-		
+
 		local circle = ""
 		local explosion = ""
 		local function blast( event )
