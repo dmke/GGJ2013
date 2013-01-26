@@ -19,13 +19,19 @@ groundMin = 420
 groundMax = 340
 groundLevel = groundMin
 speed = 5;
-score = 0
+maxHealth = 10
+health = maxHealth
+time = 0
+alive = true
 
-local scoreText = display.newText("score: " .. score, 0, 0, "Arial", 50)
+local scoreText = display.newText("score: ", 0, 0, "Arial", 20)
 scoreText:setReferencePoint(display.CenterLeftReferencePoint)
-scoreText.x = 0
+scoreText.x = 30
 scoreText.y = 30
-
+local timeText = display.newText("time: ", 0, 0, "Arial", 20)
+timeText:setReferencePoint(display.CenterLeftReferencePoint)
+timeText.x = 30
+timeText.y = 10
 
 
 --create a new group to hold all of our physics objects
@@ -37,31 +43,34 @@ require("hearty")
 require("myObstacles")
 
 function mainLoop()
-	updateHero()
-	local speed = hero:getLinearVelocity()
-	--print("speed " .. speed)
-
-			scoreText.text = "score: " .. score
-			scoreText:setReferencePoint(display.CenterLeftReferencePoint)
-			scoreText.x = 0
-			scoreText.y = 30
+	if(alive) then
+		updateHero()
+		local speed = hero:getLinearVelocity()
+		--print("speed " .. speed)
+		
+		timeText.text = "time: " .. time 
+		scoreText.text = "health: " .. health	
 			
-	updateMyBackground(speed/10)
-	blocks.x = -hero.x + 80
-	
-	
+		updateMyBackground(speed/10)
+		blocks.x = -hero.x + 80
+	end
 end
-
 
 --how many times to call(-1 means forever))
 timer.performWithDelay(1, mainLoop, -1)
 
-
-
-
-
-
-
+local function winConditionCheck( event )
+	time = time + 1;
+    if(health > 0) then
+    	health = health -1
+    end
+    -- GAME OVER
+    if(health < 1) then
+    	alive = false
+    	scoreText.text = "You loose"
+    end
+end
+timer.performWithDelay( 1000, winConditionCheck,- 1 )
 
     return gameDisplay
 end

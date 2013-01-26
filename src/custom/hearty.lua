@@ -12,14 +12,14 @@ local spriteSheet = sprite.newSpriteSheet("images/runCollection.png", 80, 80)
 --together for organizational purposes. Say for example we had 2 different monsters, we could put
 --them in the same spritesheet and create 2 different sprite sets each holding the information for
 --their respective frames. This sprite set holds all seven frames in our image,defined by 1 and 7.
-local monsterSet = sprite.newSpriteSet(spriteSheet, 1, 7)
+local monsterSet = sprite.newSpriteSet(spriteSheet, 1, 8)
 --next we make animations from our sprite sets. To do this simply tell the
 --function which sprite set to us, next name the animation, give the starting
 --frame and the number of frames in the animation, the number of milliseconds
 --we want 1 animation to take, and finally the number of times we want the
 --animation to run for. 0 will make it run until we tell the animtion to stop
-sprite.add(monsterSet, "running", 1, 6, 600, 0)
-sprite.add(monsterSet, "jumping", 7, 7, 1, 1)
+sprite.add(monsterSet, "running", 1, 8, 500, 0)
+sprite.add(monsterSet, "jumping", 8, 8, 1, 1)
 --the last step is to make a sprite out of our sprite set that holds all of the animtions
 hero = sprite.newSprite(monsterSet)
 physics.addBody( hero, { density = 1.0, friction = 0.0, bounce = 0.2, radius = 35 } )
@@ -29,7 +29,9 @@ local function onLocalCollision( self, event )
     if ( event.phase == "began" and event.other.name and event.other.name == "power_up") then  
         print("-> TRIGGER")
         event.other:removeSelf()  
-        game.score = game.score + 1
+        if(game.health < maxHealth) then
+        	game.health = game.score + 1
+        end
     end  
     if ( event.phase == "ended" and event.other.name and event.other.name == "static") then  
         print("-> TRIGGER")
@@ -43,6 +45,9 @@ hero:addEventListener( "collision", hero )
 hero:prepare("running")
 --calling play will start the loaded animation
 hero:play()
+hero.x = -80
+hero.y = 200
+hero:applyForce( 1000, -1000, hero.x, hero.y )
 game.blocks:insert(hero)
 --this is the function that handles the jump events. If the screen is touched on the left side
 --then make the monster jump
@@ -69,7 +74,10 @@ end
 Runtime:addEventListener("touch", touched, -1)
 
 
-
 function updateHero()
-	hero:applyForce( 6, 0, hero.x, hero.y )
+	if(game.alive) then
+		hero:applyForce( 6, 0, hero.x, hero.y )
+	else
+		hero:setLinearVelocity(0,0)
+	end
 end

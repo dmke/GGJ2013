@@ -2,10 +2,10 @@
 local crates = {}  
 for i = 1, 80, 1 do
 	crates[i] = display.newImage("images/crate.png")
-	crates[i].x = 500 * i + math.random(100)
+	crates[i].x = 800 * i + math.random(100)
 	crates[i].y = 200
 	crates[i].name = "power_up"
-	physics.addBody( crates[i], { density = 0.0, friction = 0.0, bounce = 0, radius = 10} )
+	physics.addBody( crates[i], { density = 0.5, friction = 0.1, bounce = 0, radius = 10} )
 	game.blocks:insert(crates[i])
 end
 -- static obstacles
