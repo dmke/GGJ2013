@@ -18,7 +18,7 @@ physics.setVelocityIterations( 3 )
 --physics.stop()
 
 
-	local    ghost = display.newImage("images/heart.png")
+	local    ghost = display.newImage("heart.png")
     ghost.name = ("ghost")
     ghost.x = 180
     ghost.y = 0
@@ -28,12 +28,12 @@ physics.setVelocityIterations( 3 )
     --make the ghosts transparent and more... ghostlike!
     ghost.alpha = .5
     local crateMaterial = { density = 1.0, friction = 0.3, bounce = 0.2 }
-
+ 
 	physics.addBody( ghost, crateMaterial )
 	ghost.bodyType = "dynamic"
 
-	local floor = display.newImage( "images/gameOver.png", 0, 280, true )
-	physics.addBody( floor, "static", { friction=0.5 } )
+	local floor = display.newImage( "gameOver.png", 0, 280, true )  
+	physics.addBody( floor, "static", { friction=0.5 } )  
 
 
 function doStuff()

@@ -20,9 +20,8 @@ local backgroundnear2 = display.newImage("images/bgnear2.png")
 backgroundnear2.x = 760
 backgroundnear2.y = 160
 
---create a new group to hold all of our blocks
-local blocks = display.newGroup()
---blocks:addEventListener("touch",setBomb)
+--create a new group to hold all of our block
+blocks = display.newGroup()
 
 --setup some variables that we will use to position the ground
 local groundMin = 420
@@ -46,7 +45,6 @@ for a = 1, 8, 1 do
 	if(numGen == 1 and isDone == false) then
 		newBlock = display.newImage("images/ground1.png")
 		physics.addBody( newBlock, "static", { friction=0.5 } )
-		--newBlock:addEventListener("touch",setBomb)
 		isDone = true
 	end
 
@@ -70,9 +68,36 @@ for a = 1, 8, 1 do
 	blocks:insert(newBlock)
 end
 
+
+local crate = display.newImage("images/crate.png")
+crate.x = 300
+crate.y = groundLevel
+--physics.addBody( crate, { density = 1.0, friction = 0.3, bounce = 0.2} )
+--blocks:insert(crate)
+
+local crate2 = display.newImage("images/crate.png")
+crate2.x = 450
+crate2.y = groundLevel
+--physics.addBody( crate2, { density = 1.0, friction = 0.3, bounce = 0.2} )
+--blocks:insert(crate2)
+
+local crate3 = display.newImage("images/crate.png")
+crate3.x = 450
+crate3.y = 200
+physics.addBody( crate3, "static", { density = 1.0, friction = 0.3, bounce = 0.2} )
+blocks:insert(crate3)
+
+local crate4 = display.newImage("images/crate.png")
+crate4.x = 400
+crate4.y = 200
+physics.addBody( crate4, "static", { density = 1.0, friction = 0.3, bounce = 0.2} )
+blocks:insert(crate4)
+
+
+
 --the update function will control most everything that happens in our game
 --this will be called every frame(30 frames per second in our case, which is the Corona SDK default)
-local function update( event )
+local function updateMyBackground( event )
 	--updateBackgrounds will call a function made specifically to handle the background movement
 	updateBackgrounds()
 	updateBlocks()
@@ -81,19 +106,7 @@ end
 
 
 function updateBlocks()
-	for a = 1, blocks.numChildren, 1 do
-		if(a > 1) then
-			newX = (blocks[a - 1]).x + 79
-		else
-			newX = (blocks[8]).x + 79 - speed
-		end
-
-		if((blocks[a]).x < -40) then
-			(blocks[a]).x, (blocks[a]).y = newX, (blocks[a]).y
-		else
-			(blocks[a]):translate(speed * -1, 0)
-		end
-	end
+	blocks.x = display.viewableContentWidth/2 - hero.x
 end
 
 function updateBackgrounds()
@@ -111,10 +124,8 @@ function updateBackgrounds()
 		backgroundnear2.x = 760
 	end
 end
-
 --this is how we call the update function, make sure that this line comes after the
 --actual function or it will not be able to find it
 --timer.performWithDelay(how often it will run in milliseconds, function to call,
 --how many times to call(-1 means forever))
-timer.performWithDelay(1, update, -1)
-
+timer.performWithDelay(1, updateMyBackground, -1)

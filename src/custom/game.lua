@@ -21,32 +21,32 @@ local sprite = require("sprite")
 local inEvent = 0
 local eventRun = 0
 
-local backbackground = display.newImage("images/background.png")
+local backbackground = display.newImage("background.png")
 backbackground.x = 240
 backbackground.y = 160
 
-local backgroundfar = display.newImage("images/bgfar1.png")
+local backgroundfar = display.newImage("bgfar1.png")
 backgroundfar.x = 480
 backgroundfar.y = 160
 
-local backgroundnear1 = display.newImage("images/bgnear2.png")
+local backgroundnear1 = display.newImage("bgnear2.png")
 backgroundnear1.x = 240
 backgroundnear1.y = 160
 
-local backgroundnear2 = display.newImage("images/bgnear2.png")
+local backgroundnear2 = display.newImage("bgnear2.png")
 backgroundnear2.x = 760
 backgroundnear2.y = 160
 
-local gameOver = display.newImage("images/gameOver.png")
+local gameOver = display.newImage("gameOver.png")
 gameOver.name = "gameOver"
 gameOver.x = 0
 gameOver.y = 500
 
-local yesButton = display.newImage("images/yesButton.png")
+local yesButton = display.newImage("yesButton.png")
 yesButton.x = 100
 yesButton.y = 600
 
-local noButton = display.newImage("images/noButton.png")
+local noButton = display.newImage("noButton.png")
 noButton.x = 100
 noButton.y = 600
 
@@ -80,7 +80,7 @@ local speed = 5
 
 --create ghosts and set their position to be off-screen
 for a = 1, 3, 1 do
-    ghost = display.newImage("images/ghost.png")
+    ghost = display.newImage("ghost.png")
     ghost.name = ("ghost" .. a)
     ghost.id = a
     ghost.x = 800
@@ -90,12 +90,12 @@ for a = 1, 3, 1 do
     ghost.isAlive = false
     --make the ghosts transparent and more... ghostlike!
     ghost.alpha = .5
-    ghosts:insert(ghost)
+    ghosts:insert(ghost)    
 end
 
 --create spikes
 for a = 1, 3, 1 do
-    spike = display.newImage("images/spikeBlock.png")
+    spike = display.newImage("spikeBlock.png")
     spike.name = ("spike" .. a)
     spike.id = a
     spike.x = 900
@@ -106,7 +106,7 @@ end
 
 --create blasts
 for a=1, 5, 1 do
-    blast = display.newImage("images/blast.png")
+    blast = display.newImage("blast.png")
     blast.name = ("blast" .. a)
     blast.id = a
     blast.x = 800
@@ -118,24 +118,24 @@ end
 for a = 1, 8, 1 do
 	isDone = false
 	numGen = math.random(2)
-	local newBlock
+	local newBlock	
 	if(numGen == 1 and isDone == false) then
-		newBlock = display.newImage("images/ground1.png")
+		newBlock = display.newImage("ground1.png")
 		isDone = true
 	end
-
+	
 	if(numGen == 2 and isDone == false) then
-		newBlock = display.newImage("images/ground2.png")
+		newBlock = display.newImage("ground2.png")
 		isDone = true
 	end
-
+	
 	if(numGen == 3 and isDone == false) then
-		newBlock = display.newImage("images/ground3.png")
+		newBlock = display.newImage("ground3.png")
 		isDone = true
 	end
-
+	
 	if(isDone == false) then
-		newBlock = display.newImage("images/ground1.png")
+		newBlock = display.newImage("ground1.png")
 	end
 	newBlock.name = ("block" .. a)
 	newBlock.id = a
@@ -144,7 +144,7 @@ for a = 1, 8, 1 do
 	blocks:insert(newBlock)
 end
 
-local boss = display.newImage("images/boss.png", 150, 150)
+local boss = display.newImage("boss.png", 150, 150)
 boss.x = 300
 boss.y = 550
 boss.isAlive = false
@@ -154,7 +154,7 @@ boss.canShoot = false
 boss.spitCycle = 0
 
 for a=1, 3, 1 do
-    bossSpit = display.newImage("images/bossSpit.png")
+    bossSpit = display.newImage("bossSpit.png")    
     bossSpit.x = 400
     bossSpit.y = 550
     bossSpit.isAlive = false
@@ -165,7 +165,7 @@ end
 
 
 --create our sprite sheet
-local spriteSheet = sprite.newSpriteSheet("images/monsterSpriteSheet.png", 100, 100)
+local spriteSheet = sprite.newSpriteSheet("monsterSpriteSheet.png", 100, 100)
 local monsterSet = sprite.newSpriteSet(spriteSheet, 1, 7)
 sprite.add(monsterSet, "running", 1, 6, 600, 0)
 sprite.add(monsterSet, "jumping", 7, 7, 1, 1)
@@ -213,11 +213,11 @@ local function update( event )
 	updateSpikes()
 	updateGhosts()
 	updateBossSpit()
-
+	
 	updateLayer(speed)
-
-	if(boss.isAlive == true) then
-		updateBoss()
+	
+	if(boss.isAlive == true) then		
+		updateBoss()		
 	end
 	checkCollisions()
 end
@@ -238,7 +238,7 @@ function updateBoss()
 	else
 		boss.alpha = boss.alpha - .01
 	end
-
+	
 	if(boss.alpha <= 0) then
 		boss.isAlive = false
 		boss.x = 300
@@ -247,7 +247,7 @@ function updateBoss()
 		boss.health = 10
 		inEvent = 0
 		boss.spitCycle = 0
-	end
+	end	
 end
 
 function updateBossSpit()
@@ -289,7 +289,7 @@ function checkCollisions()
 			noButton.y = display.contentHeight/2 + 40
 		end
 	end
-
+	
 	--stop the game if the monster runs into a spike wall
 	for a = 1, spikes.numChildren, 1 do
 		if(spikes[a].isAlive == true) then
@@ -308,7 +308,7 @@ function checkCollisions()
 			end
 		end
 	end
-
+	
 	--make sure the player didn't get hit by a ghost!
 	for a = 1, ghosts.numChildren, 1 do
 		if(ghosts[a].isAlive == true) then
@@ -327,7 +327,7 @@ function checkCollisions()
 			end
 		end
 	end
-
+	
 	--make sure the player didn't get hit by the boss's spit!
 	for a = 1, bossSpits.numChildren, 1 do
 		if(bossSpits[a].isAlive == true) then
@@ -421,7 +421,7 @@ function updateBlasts()
                 end
             end
         end
-
+ 
 		--check for collisions between the blasts and the ghosts
 		for b = 1, ghosts.numChildren, 1 do
 			if(ghosts[b].isAlive == true) then
@@ -435,8 +435,8 @@ function updateBlasts()
 					ghosts[b].speed = 0
 				end
             end
-        end
-
+        end		
+		
 		--check for collisions with the boss
 		if(boss.isAlive == true) then
 			if(blasts[a].y - 25 > boss.y - 120 and blasts[a].y + 25 < boss.y + 120 and boss.x - 40 < blasts[a].x + 25 and boss.x + 40 > blasts[a].x - 25) then
@@ -446,7 +446,7 @@ function updateBlasts()
 				boss.health = boss.health - 1
 			end
 		end
-
+		
 		--check for collisions between the blasts and the bossSpit
 		for b = 1, bossSpits.numChildren, 1 do
 			if(bossSpits[b].isAlive == true) then
@@ -460,8 +460,8 @@ function updateBlasts()
 					bossSpits[b].speed = 0
 				end
             end
-        end
-
+        end	
+        
     end
 end
 
@@ -471,7 +471,7 @@ function updateMonster()
      if(monster.isAlive == true) then
           if(onGround) then
                if(wasOnGround) then
-
+ 
                else
                     monster:prepare("running")
                     monster:play()
@@ -535,19 +535,19 @@ function restartGame()
      backgroundnear1.y = 160
      backgroundnear2.x = 760
      backgroundnear2.y = 160
-
+	 
 	 --reset the boss
 	 boss.isAlive = false
 	 boss.x = 300
 	 boss.y = 550
-
+	 
 	 --reset the boss's spit
      for a = 1, bossSpits.numChildren, 1 do
           bossSpits[a].x = 400
           bossSpits[a].y = 550
 		  bossSpits[a].isAlive = false
      end
-
+	 
 	 noButton.x = 100
 	 noButton.y = 600
 	 yesButton.x = 100
@@ -641,11 +641,11 @@ function updateBlocks()
 					end
 				end
 			end
-
+			
 			if(inEvent == 15) then
 				groundLevel = groundMin
 			end
-
+			
 			 checkEvent()
 			else
 				 (blocks[a]):translate(speed * -1, 0)
@@ -664,7 +664,7 @@ function checkEvent()
      --if we are in an event then do nothing
      if(inEvent > 0 and eventRun > 0) then
           --Do nothing
-     else
+     else		
 		if(boss.isAlive == false and score%10 == 0) then
 			boss.isAlive = true
 			boss.x = 400
@@ -673,24 +673,24 @@ function checkEvent()
 		end
 		if(boss.isAlive == true) then
 			inEvent = 15
-		else
+		else				
 		  check = math.random(100)
 		  if(check > 80 and check < 99) then
 			   inEvent = math.random(10)
 			   eventRun = 1
 		  end
-
+		  
 		  if(check > 98) then
 				 inEvent = 11
 				 eventRun = 2
-			end
+			end			
 			--the more frequently you want events to happen then
 			--greater you should make the checks
 			if(check > 72 and check < 81) then
 					inEvent = 12
 					eventRun = 1
 			end
-
+			
 			--ghost event
 			if(check > 60 and check < 73) then
 					inEvent = 13
@@ -717,7 +717,7 @@ function runEvent()
      if(groundLevel > groundMin) then
           groundLevel = groundMin
      end
-
+	 
 	--this will be a little bit different as we want this to really
 	--make the game feel even more random. change where the ghosts
 	--spawn and how fast they come at the monster.
@@ -740,13 +740,13 @@ end
 function updateBackgrounds()
 	--far background movement
 	backgroundfar.x = backgroundfar.x - (speed/55)
-
+	
 	--near background movement
 	backgroundnear1.x = backgroundnear1.x - (speed/5)
 	if(backgroundnear1.x < -239) then
 		backgroundnear1.x = 760
 	end
-
+	
 	backgroundnear2.x = backgroundnear2.x - (speed/5)
 	if(backgroundnear2.x < -239) then
 		backgroundnear2.x = 760
