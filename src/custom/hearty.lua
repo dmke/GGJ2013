@@ -1,10 +1,8 @@
 --We will use sprite as a 'sprite handler' to create spritesheets
 local sprite = require("sprite")
-<<<<<<< HEAD
-=======
 local player = require("audioPlayer")
 require("myBackground")
->>>>>>> added first iteration of audio playback mechanism
+
 --creating a new spritesheet will break the image you put into even blocks that are 100
 --by 100, change those parameters to whatever size your images are. Note that this method
 --of sprite creation only works for sprites that are the same size. There are other methods
