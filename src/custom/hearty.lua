@@ -28,22 +28,6 @@ hero = sprite.newSprite(monsterSet)
 physics.addBody( hero, { density = 1.0, friction = 0.0, bounce = 0.2, radius = 35 } )
 hero.isFixedRotation = true
 
-<<<<<<< HEAD
-local function onLocalCollision( self, event )
-    if ( event.phase == "began" and event.other.name and event.other.name == "power_up") then
-        print("-> TRIGGER")
-        event.other:removeSelf()
-        game.score = game.score + 1
-    end
-    if ( event.phase == "ended" and event.other.name and event.other.name == "dynamic") then
-        print("-> TRIGGER")
-        player.death()
-        --physics.removeBody(event.other)
-    end
-end
-hero.collision = onLocalCollision
-hero:addEventListener( "collision", hero )
-=======
 local function onLocalCollision( self, event )  
     if ( event.phase == "began" and event.other.name and event.other.name == "power_up") then  
         --print("-> TRIGGER")
@@ -52,7 +36,7 @@ local function onLocalCollision( self, event )
         	game.health = game.health + 1
         end
     end  
-    if ( event.phase == "ended" and event.other.name and event.other.name == "static") then  
+    if ( event.phase == "ended" and event.other.name and event.other.name == "dynamic") then  
         --print("-> TRIGGER")
         --physics.removeBody(event.other)        
     end  
@@ -62,8 +46,7 @@ local function onLocalCollision( self, event )
     end  
 end  
 hero.collision = onLocalCollision  
-hero:addEventListener( "collision", hero )  
->>>>>>> 7be940f2d798e7f87bf632a6f8aaf57c8a21e03a
+hero:addEventListener( "collision", hero )
 
 --use prepare to let the sprite know which animation it is going to use
 hero:prepare("running")
