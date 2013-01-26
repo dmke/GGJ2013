@@ -1,9 +1,9 @@
--- 
+--
 -- Abstract: Bullet sample project
 -- Demonstrates "isBullet" attribute for continuous collision detection
--- 
+--
 -- Version: 1.1 (revised for Alpha 2)
--- 
+--
 -- Sample code is MIT licensed, see http://developer.anscamobile.com/code/license
 -- Copyright (C) 2010 ANSCA Inc. All Rights Reserved.
 
@@ -16,14 +16,14 @@ physics.setScale( 40 )
 
 
 -- The final "true" parameter overrides Corona's auto-scaling of large images
-local background = display.newImage( "bricks.png", 0, 0, true )
+local background = display.newImage( "images/bricks.png", 0, 0, true )
 background.x = display.contentWidth / 2
 background.y = display.contentHeight / 2
 
 --local floor = display.newImage( "floor.png", 0, 280, true )
 --physics.addBody( floor, "static", { friction=0.5 } )
 
-local explosionSound = media.newEventSound( "explosion.mp3" )
+local explosionSound = media.newEventSound( "audio/explosion.mp3" )
 
 local function onLocalCollision( self, event )
         if ( event.phase == "began" and self.myName == "circle" ) then
@@ -36,7 +36,7 @@ local function onLocalCollision( self, event )
 			end
 			event.other:applyForce( forcex, forcey, self.x, self.y )
 			if(math.abs(forcex) > 60 or math.abs(forcey) > 60) then
-				local explosion = display.newImage( "explosion.png", event.other.x, event.other.y )
+				local explosion = display.newImage( "images/explosion.png", event.other.x, event.other.y )
 				event.other:removeSelf()
 				local function removeExplosion( event )
 					explosion:removeSelf()
@@ -50,15 +50,15 @@ end
 
 local function setBomb ( event )
 	if(event.phase == "began") then
-		local bomb = display.newImage( "bomb.png", event.x,event.y )
+		local bomb = display.newImage( "images/bomb.png", event.x,event.y )
 		physics.addBody( bomb, { density=0.2, friction=0.1, bounce=0.5 } )
-		
+
 		local circle = ""
 		local explosion = ""
 		local function blast( event )
 			media.playEventSound( explosionSound )
 		    circle = display.newCircle( bomb.x, bomb.y, 80 )
-			explosion = display.newImage( "explosion.png", bomb.x, bomb.y )
+			explosion = display.newImage( "images/explosion.png", bomb.x, bomb.y )
 			bomb:removeSelf()
 			circle:setFillColor(0,0,0, 0)
 			physics.addBody( circle, "static", {isSensor = true} )
