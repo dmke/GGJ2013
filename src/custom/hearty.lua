@@ -25,18 +25,19 @@ hero = sprite.newSprite(monsterSet)
 physics.addBody( hero, { density = 1.0, friction = 0.0, bounce = 0.2, radius = 25 } )
 hero.isFixedRotation = true
 
-local function onLocalCollision( self, event )  
-    if ( event.phase == "began" and event.other.name and event.other.name == "power_up") then  
+local function onLocalCollision( self, event )
+    if ( event.phase == "began" and event.other.name and event.other.name == "power_up") then
         print("-> TRIGGER")
-        event.other:removeSelf()  
-    end  
-    if ( event.phase == "ended" and event.other.name and event.other.name == "static") then  
+        event.other:removeSelf()
+    end
+    if ( event.phase == "ended" and event.other.name and event.other.name == "static") then
         print("-> TRIGGER")
+        player.death()
         --hero:applyForce( 200, 0, hero.x, hero.y )
-    end  
-end  
-hero.collision = onLocalCollision  
-hero:addEventListener( "collision", hero )  
+    end
+end
+hero.collision = onLocalCollision
+hero:addEventListener( "collision", hero )
 
 --use prepare to let the sprite know which animation it is going to use
 hero:prepare("running")
@@ -53,7 +54,7 @@ function touched( event )
               	hero:applyForce( 0, -400, hero.x, hero.y )
               	hero:prepare("jumping")
 				hero:play()
-                player.explosion()
+                player.death()
           end
           if(event.x <= 241) then
                 print("TOUCHED")
