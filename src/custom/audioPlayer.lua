@@ -37,7 +37,11 @@ end
 
 function stopBackgroundMusic()
   local vol = audio.getVolume(channels.bgMusic)
-  audio.fadeOut({ channel = channels.bgMusic, time = 1000 })
-  audio.stop(channels.bgMusic)
-  audio.setVolume(vol, { channel = channels.bgMusic })
+  local t = 5000
+
+  audio.fadeOut({ channel = channels.bgMusic, time = t })
+  timer.performWithDelay(t, function(e)
+    audio.stop(channels.bgMusic)
+    audio.setVolume(vol, { channel = channels.bgMusic })
+  end)
 end
