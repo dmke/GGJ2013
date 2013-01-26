@@ -7,5 +7,18 @@ settings =
  		{
  		"landscapeLeft", "landscapeRight"
 		}
+	},
+	iphone =
+    {
+		plist =
+		{
+			UIAppFonts = 
+			{
+				"badaboom.ttf"
+			}
+		},
+	},
+	UIAppFonts = {
+		"badaboom.ttf"
 	}
 }

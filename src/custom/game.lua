@@ -24,11 +24,11 @@ health = maxHealth
 time = 0
 alive = true
 
-local scoreText = display.newText("score: ", 0, 0, "Arial", 20)
+local scoreText = display.newText("score: ", 0, 0, "badaboom", 20)
 scoreText:setReferencePoint(display.CenterLeftReferencePoint)
 scoreText.x = 30
 scoreText.y = 30
-local timeText = display.newText("time: ", 0, 0, "Arial", 20)
+local timeText = display.newText("time: ", 0, 0, "badaboom", 20)
 timeText:setReferencePoint(display.CenterLeftReferencePoint)
 timeText.x = 30
 timeText.y = 10
@@ -64,10 +64,13 @@ local function winConditionCheck( event )
     if(health > 0) then
     	health = health -1
     end
-    -- GAME OVER
-    if(health < 1) then
+    if(alive==false) then
+    	--print("dead")
+    elseif(health < 1) then  -- GAME OVER
     	alive = false
     	scoreText.text = "You loose"
+    	hero:prepare("dieing")
+		hero:play()
     end
 end
 timer.performWithDelay( 1000, winConditionCheck,- 1 )
