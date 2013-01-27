@@ -28,11 +28,11 @@ new = function( params )
     scoreText:setReferencePoint(display.CenterLeftReferencePoint)
     scoreText.x = 60
     scoreText.y = 20
+
     local timeText = display.newText("time: ", 0, 0, "badaboom", 60)
     timeText:setReferencePoint(display.CenterLeftReferencePoint)
     timeText.x = 400
     timeText.y = 20
-
 
     --create a new group to hold all of our physics objects
     blocks = display.newGroup()
