@@ -4,8 +4,6 @@ new = function( params )
     local gameDisplay = display.newGroup()
     display.setStatusBar(display.HiddenStatusBar)
 
-
-
 local physics = require("physics")
 physics.start()
 physics.setGravity(0, 25)
@@ -18,8 +16,6 @@ player.aggressor()
 --setup some variables that we will use to position the ground
 groundLevel = 720
 screenWidth = 1280
-
-
 
 speed = 5
 maxHealth = 30
@@ -55,7 +51,7 @@ function mainLoop()
 		scoreText.text = "health: " .. health
 
 		updateMyBackground(speed/10)
-		blocks.x = -hero.x + 80
+		blocks.x = -hero.x + screenWidth/4
 		particles.x = -hero.x + 100
 	end
 end
