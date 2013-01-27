@@ -91,6 +91,26 @@ for i = 1, 10, 1 do
 	game.blocks:insert(cars[i])
 end
 
+local taxi = {}
+for i = 1, 10, 1 do
+	taxi[i] = display.newImage("images/taxi.png")
+	taxi[i].x = 5000 * i + math.random(5000) + 1200
+	taxi[i].y = obstacleLevel
+	taxi[i].name = "dynamic"
+	physics.addBody( taxi[i], "dynamic", { density = 2.0, friction = 0.1, bounce = 0.1})
+	game.blocks:insert(taxi[i])
+end
+
+local red_car = {}
+for i = 1, 10, 1 do
+	red_car[i] = display.newImage("images/car.png")
+	red_car[i].x = 8000 * i + math.random(5000) + 1200
+	red_car[i].y = obstacleLevel
+	red_car[i].name = "dynamic"
+	physics.addBody( red_car[i], "dynamic", { density = 2.0, friction = 0.1, bounce = 0.1})
+	game.blocks:insert(red_car[i])
+end
+
 -- testcode, use for random generator?
 local numBlocks = 0
 local obstacleArray = {}

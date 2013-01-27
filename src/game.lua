@@ -45,14 +45,14 @@ function collidesound(event)
 	player.carCrash()
 	timer.cancel(event.source)
 end
--- play sound in 1.2 seconds
-timer.performWithDelay(1200, collidesound, -1)
+-- play sound in 1.3 seconds
+timer.performWithDelay(1300, collidesound, -1)
 
 function emergencyCollide( self, event )
 	if ( event.other.name and event.other.name == "hydrant") then
 		e_x = emergency.x
 		e_y = emergency.y
-		emergency:applyForce( -7000, 0, emergency.x, emergency.y )
+		emergency:applyForce( -9000, 0, emergency.x, emergency.y )
 		emergency:removeSelf()
 		emergency = display.newImage("images/emergencyCrash.png")
 		emergency.x = e_x
@@ -69,11 +69,11 @@ emergency.name = "emergency"
 emergency.collision = emergencyCollide
 emergency:addEventListener( "collision", emergency )
 physics.addBody( emergency, { density = 0.2, friction = 0.008, bounce = 0.0} )
-emergency:applyForce( 8000, 0, emergency.x, emergency.y )
+emergency:applyForce( 9000, 0, emergency.x, emergency.y )
 blocks:insert(emergency)
 
 lamp = display.newImage("images/hydrant.png")
-lamp.x = 1600
+lamp.x = 1900
 lamp.y = obstacleLevel
 lamp.name = "hydrant"
 physics.addBody( lamp, { density = 0.0, friction = 0.0, bounce = 0.0} )
