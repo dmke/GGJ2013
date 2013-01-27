@@ -1,7 +1,6 @@
 module(..., package.seeall)
 
 local director = require("director")
-local sprite = require("sprite")
 
 new = function(params)
     local menuDisplay = display.newGroup()
