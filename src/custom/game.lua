@@ -9,7 +9,7 @@ new = function( params )
 local physics = require("physics")
 physics.start()
 physics.setGravity(0, 25)
-physics.setDrawMode("hybrid") -- overlays collision outlines on normal Corona objects
+physics.setDrawMode("normal") -- overlays collision outlines on normal Corona objects
 
 --start background music
 local player = require("audioPlayer")
@@ -37,7 +37,7 @@ timeText.y = 10
 
 --create a new group to hold all of our physics objects
 blocks = display.newGroup()
-
+particles = display.newGroup()
 
 require("myBackground")
 require("hearty")
@@ -48,12 +48,13 @@ function mainLoop()
 		updateHero()
 		local speed = hero:getLinearVelocity()
 		--print("speed " .. speed)
-		
-		timeText.text = "time: " .. time 
-		scoreText.text = "health: " .. health	
-			
+
+		timeText.text = "time: " .. time
+		scoreText.text = "health: " .. health
+
 		updateMyBackground(speed/10)
 		blocks.x = -hero.x + 80
+		particles.x = -hero.x + 100
 	end
 end
 
