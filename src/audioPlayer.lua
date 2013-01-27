@@ -8,6 +8,7 @@ local handles = {
   defibrillator = audio.loadSound("audio/defibrillator.mp3"),
   flatline      = audio.loadSound("audio/flatline.mp3"),
   jump          = audio.loadSound("audio/jump.mp3"),
+  lantern          = audio.loadSound("audio/lantern.mp3"),
   boost         = audio.loadSound("audio/boost.mp3"),
   brickStone    = audio.loadSound("audio/brick_stone.mp3"),
   cardboardBox  = audio.loadSound("audio/cardboard_box.mp3"),
@@ -154,6 +155,10 @@ end
 
 function powerDown()
   sfx(handles.powerDown, config.powerUp)
+end
+
+function lantern()
+  sfx(handles.lantern, config.powerUp)
 end
 
 function powerUp()

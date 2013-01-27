@@ -19,7 +19,7 @@ groundLevel = display.contentHeight + display.screenOriginY/2  --FIXME android n
 screenWidth = display.contentWidth 
 
 speed = 5
-maxHealth = 2
+maxHealth = 60
 health = maxHealth
 time = 0
 alive = true
@@ -42,7 +42,45 @@ require("myBackground")
 require("hearty")
 require("myObstacles")
 
-print(display.screenOriginX)
+function collidesound(event)
+	player.carCrash()
+	timer.cancel(event.source)
+end
+-- play sound in 1.2 seconds
+timer.performWithDelay(1200, collidesound, -1)
+
+function emergencyCollide( self, event )
+	if ( event.other.name and event.other.name == "hydrant") then
+		e_x = emergency.x
+		e_y = emergency.y
+		emergency:applyForce( -7000, 0, emergency.x, emergency.y )
+		emergency:removeSelf()
+		emergency = display.newImage("images/emergencyCrash.png")
+		emergency.x = e_x
+		emergency.y = e_y
+		physics.addBody( emergency, { density = 0.0, friction = 0.0, bounce = 0.0} )
+		blocks:insert(emergency)
+	end
+end
+
+emergency = display.newImage("images/emergency.png")
+emergency.x = 0
+emergency.y = obstacleLevel
+emergency.name = "emergency"
+emergency.collision = emergencyCollide
+emergency:addEventListener( "collision", emergency )
+physics.addBody( emergency, { density = 0.2, friction = 0.008, bounce = 0.0} )
+emergency:applyForce( 8000, 0, emergency.x, emergency.y )
+blocks:insert(emergency)
+
+lamp = display.newImage("images/hydrant.png")
+lamp.x = 1600
+lamp.y = obstacleLevel
+lamp.name = "hydrant"
+physics.addBody( lamp, { density = 0.0, friction = 0.0, bounce = 0.0} )
+blocks:insert(lamp)
+
+--print(display.screenOriginX)
 
 function mainLoop(event)
 	if(alive) then

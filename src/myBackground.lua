@@ -19,6 +19,9 @@ backgroundnear2.y = game.groundLevel - backGroundNearHeight/2
 local backgroundnear4 = display.newImage("images/midground4.png")
 backgroundnear4.x = backGroundNearWidth * 2
 backgroundnear4.y = game.groundLevel - backGroundNearHeight/2
+local backgroundnear5 = display.newImage("images/midground5.png")
+backgroundnear5.x = backGroundNearWidth * 2+800
+backgroundnear5.y = game.groundLevel - backGroundNearHeight/2
 
 --SKYSCRAPER
 local backgroundfar = display.newImage("images/backgroundHousing.png")
@@ -90,5 +93,9 @@ function updateMyBackground(speed)
   backgroundnear4.x = backgroundnear4.x - (speed/5)
   if(backgroundnear4.x < -backGroundNearWidth/2) then
     backgroundnear4.x = game.screenWidth + backGroundNearWidth
+  end
+  backgroundnear5.x = backgroundnear5.x - (speed/5)
+  if(backgroundnear5.x < -backGroundNearWidth/2) then
+    backgroundnear5.x = game.screenWidth + backGroundNearWidth
   end
 end

@@ -16,6 +16,7 @@ sprite.add(monsterSet, "jumping", 8, 8, 1, 1)
 sprite.add(monsterSet, "dieing", 25, 24, 50, 1)
 
 hero = sprite.newSprite(monsterSet)
+
 physics.addBody( hero, { density = 1.0, friction = 0.01, bounce = 0.2, radius = 35 } )
 hero.isFixedRotation = true
 
@@ -37,6 +38,8 @@ local function onLocalCollision( self, event )
         --print("-> RUN")
         if event.other.sound == "trashcan" then
 			player.trashcan()
+        elseif event.other.sound == "lantern" then
+			player.lantern()
         elseif event.other.sound == "brickStone" then
 			player.brickStone()
 		elseif event.other.sound == "woodBox" then
@@ -57,8 +60,9 @@ hero:addEventListener( "collision", hero )
 hero:prepare("running")
 hero:play()
 hero.x = 0
-hero.y = game.groundLevel - 320
-hero:setLinearVelocity( 750, -500, hero.x, hero.y )
+--hero.y = game.groundLevel - 320
+hero.y = game.groundLevel - 1400
+hero:setLinearVelocity( 800, -500, hero.x, hero.y )
 game.blocks:insert(hero)
 
 function touched(event)
