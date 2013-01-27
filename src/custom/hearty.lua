@@ -44,7 +44,8 @@ local function onLocalCollision( self, event )
         print("-> RUN")
         player.trashcan()
         hero:play()
-	end
+        bloodParticles.spray(hero.x, hero.y + hero.height/3, 10)
+    end
     if ( event.phase == "began" and event.other.name and event.other.name == "static") then
         print("-> RUN")
         hero:play()
