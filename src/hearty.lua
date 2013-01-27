@@ -73,6 +73,7 @@ function reset_dash(event)
 		hero.density = 1.0
 		hero:prepare("running")
 		hero:play()
+		hero:resetMassData()
 		dashing = false
 	end
 end
