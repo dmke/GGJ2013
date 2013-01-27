@@ -20,7 +20,7 @@ local handles = {
   woodBox       = audio.loadSound("audio/wood_box.mp3"),
   woodBreak     = audio.loadSound("audio/wood_break.mp3"),
 
-  heartbeat = audio.loadSound("audio/heartbeat.mp3"),
+  heartbeat = audio.loadSound("audio/heartbeat.wav"),
   aggressor = {
     audio.loadSound("audio/music_loop_1.mp3"),
     audio.loadSound("audio/music_loop_2.mp3"),
@@ -79,7 +79,7 @@ local function startBackgroundMusic(theme)
     end
   end
 
-  playHeartbeat()
+  --playHeartbeat()
   --playBackgroundMusic()
 end
 
