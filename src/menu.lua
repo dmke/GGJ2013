@@ -37,12 +37,18 @@ new = function(params)
         return true
     end
 
+	aboutScreen = nil
     local function aboutButtonListener(event)
         if event.phase == "began" then
             aboutButton = display.newImage("images/menu/gui_startscreen_credits_aktiv.png")
         else
             aboutButton = display.newImage("images/menu/gui_startscreen_credits.png")
-            director:changeScene("about", "fade")
+			if aboutScreen == nil then
+				aboutScreen = display.newImage("images/menu/gui_creditsscreen_credits.png")
+			else
+				display.remove(aboutScreen)
+				aboutScreen = nil
+			end
         end
         aboutButton.x = 370
         aboutButton.y = 600
