@@ -12,7 +12,7 @@ backgroundnear3.x = backGroundNearWidth * 3
 backgroundnear3.y = game.groundLevel - backGroundNearHeight/2
 local backgroundnear1 = display.newImage("images/midground1.png")
 backgroundnear1.x = backGroundNearWidth
-backgroundnear1.y = game.groundLevel - backGroundNearHeight/2
+backgroundnear1.y = game.groundLevel - 900/2 -- fix due to file format
 local backgroundnear2 = display.newImage("images/midground2.png")
 backgroundnear2.x = backGroundNearWidth * 2
 backgroundnear2.y = game.groundLevel - backGroundNearHeight/2
@@ -89,10 +89,10 @@ function updateMyBackground(speed)
 	end
 	backgroundnear3.x = backgroundnear3.x - (speed/5)
 	if(backgroundnear3.x < -backGroundNearWidth/2) then
-		backgroundnear3.x = game.screenWidth + backGroundNearWidth --varianz
+		backgroundnear3.x = game.screenWidth + backGroundNearWidth
 	end
 	backgroundnear4.x = backgroundnear4.x - (speed/5)
 	if(backgroundnear4.x < -backGroundNearWidth/2) then
-		backgroundnear4.x = game.screenWidth + backGroundNearWidth --varianz
+		backgroundnear4.x = game.screenWidth + backGroundNearWidth
 	end
 end
