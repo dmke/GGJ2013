@@ -42,6 +42,7 @@ local function onLocalCollision( self, event )
         --print("-> TRIGGER")
         --physics.removeBody(event.other)
         print("-> RUN")
+        player.trashcan()
         hero:play()
 	end
     if ( event.phase == "began" and event.other.name and event.other.name == "static") then
