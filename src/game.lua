@@ -1,5 +1,4 @@
 module(..., package.seeall)
-local director = require("director")
 
 new = function( params )
     local gameDisplay = display.newGroup()
@@ -16,10 +15,10 @@ player.aggressor()
 
 --setup some variables that we will use to position the ground
 groundLevel = display.contentHeight + display.screenOriginY/2  --FIXME android nenu
-screenWidth = display.contentWidth 
+screenWidth = display.contentWidth
 
 speed = 5
-maxHealth = 60
+maxHealth = 5
 health = maxHealth
 time = 0
 alive = true
@@ -80,13 +79,11 @@ lamp.name = "hydrant"
 physics.addBody( lamp, { density = 0.0, friction = 0.0, bounce = 0.0} )
 blocks:insert(lamp)
 
---print(display.screenOriginX)
 
 function mainLoop(event)
 	if(alive) then
 		updateHero()
 		local speed = hero:getLinearVelocity()
-		--print("speed " .. speed)
 
 		timeText.text = "time: " .. time
 		scoreText.text = "health: " .. health
@@ -99,61 +96,60 @@ function mainLoop(event)
 	end
 end
 
-function finish( event )
-	print("show revive screen")
-	physics.stop()
-	hero.currentFrame = 8*3
-	hero:pause()
-	hero.currentFrame = 8*3
-	
+
+function finish(event)
+    if alive then
+        return false
+    end
+
+    hero.currentFrame = 8*3
+    hero:pause()
+    hero.currentFrame = 8*3
+
 	_G.gameOver = display.newImage("images/menu/gui_gameover.png")
 	_G.gameOver.name = "gameOver"
-	_G.gameOver.x = 1280/2
-	_G.gameOver.y = 720/2
+	_G.gameOver.x = display.contentWidth/2
+	_G.gameOver.y = display.contentHeight/2
 
 	revive = display.newImage("images/menu/gui_gameover_revive.png")
 	revive.name = "revive"
-	rev_x = 1280/2-300
-	rev_y = 720/2+200
+	rev_x = display.contentWidth/2 - 300
+	rev_y = display.contentHeight/2 + 200
 	revive.x = rev_x
 	revive.y = rev_y
 	game.revive = revive
-	
-    function reviveButtonListener( event )
+
+    local function reviveButtonListener( event )
 		revive = game.revive
-		print(event.phase)
         if event.phase == "began" then
 			revive:removeSelf()
 			revive = nil
             revive = display.newImage("images/menu/gui_gameover_revive_aktiv.png")
-			revive.x = rev_x+20
-			revive.y = rev_y+10
-			player.defibrillator()
+			revive.x = rev_x + 20
+			revive.y = rev_y + 10
+            player.defibrillator()
         elseif event.phase == "ended" then
-			revive:removeSelf()
-			revive = nil
-            --revive = display.newImage("images/menu/gui_gameover_revive.png")
-			--revive.x = rev_x
-			--revive.y = rev_y
+            revive:removeSelf()
+            revive = nil
             _G.gameOver:removeSelf()
-			-- restart game here
+            -- restart game here
+            director:changeScene("menu", "fade")
         end
 		game.revive = revive
         return true
     end
-	revive:addEventListener("touch", reviveButtonListener )
+	revive:addEventListener("touch", reviveButtonListener)
 end
 
 --how many times to call(-1 means forever))
 timer.performWithDelay(1, mainLoop, -1)
+
     local function winConditionCheck( event )
         time = time + 1;
         if health > 0 then
             health = health -1
         end
-        if not alive then
-            --print("dead")
-        elseif health < 1 and alive then  -- GAME OVER
+        if health < 1 and alive then  -- GAME OVER
             alive = false
             --scoreText.text = "You loose"
             hero:prepare("dieing")

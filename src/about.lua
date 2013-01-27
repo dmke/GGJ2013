@@ -1,5 +1,4 @@
 module(..., package.seeall)
-local director = require("director")
 
 new = function( params )
     local gameDisplay = display.newGroup()
@@ -10,10 +9,10 @@ new = function( params )
     backbackground.y = 160
 
     local function backButtonListener( event )
-        director:changeScene( "menu", "fade" )
+        director:changeScene("menu", "fade")
         return true
     end
-	backbackground:addEventListener("touch", backButtonListener )
+	backbackground:addEventListener("touch", backButtonListener)
 
     return gameDisplay
 end

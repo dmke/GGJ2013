@@ -1,7 +1,5 @@
 module(..., package.seeall)
 
-local director = require("director")
-
 new = function(params)
     local menuDisplay = display.newGroup()
 
