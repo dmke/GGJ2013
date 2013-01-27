@@ -38,7 +38,7 @@ local config = {
 }
 
 local function setVolume(vol, ch)
-  audio.setVolume(handles.explosion[2], { channel=ch })
+  audio.setVolume(vol, { channel=ch })
 end
 
 local function sfx(sample, cfg)
