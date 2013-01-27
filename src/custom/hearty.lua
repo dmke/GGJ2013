@@ -2,6 +2,7 @@
 local sprite = require("sprite")
 local player = require("audioPlayer")
 require("myBackground")
+local bloodParticles = require("bloodParticles")
 
 local activity = "";
 
@@ -39,13 +40,15 @@ local function onLocalCollision( self, event )
     end
     if ( event.phase == "ended" and event.other.name and event.other.name == "dynamic") then
         --print("-> TRIGGER")
-        --physics.removeBody(event.other)        
+        --physics.removeBody(event.other)
+        print("-> RUN")
+        player.trashcan()
+        hero:play()
+	end
+    if ( event.phase == "began" and event.other.name and event.other.name == "static") then
         print("-> RUN")
         hero:play()
-	end  
-    if ( event.phase == "began" and event.other.name and event.other.name == "static") then  
-        print("-> RUN")
-        hero:play()
+        bloodParticles.spray(hero.x, hero.y + hero.height/3, 5)
     end
 end
 hero.collision = onLocalCollision
@@ -70,6 +73,7 @@ function touched( event )
             --hero:prepare("jumping")
             hero:pause()
             player.jump()
+            bloodParticles.spray(hero.x, hero.y + hero.height/3, 20)
         end
         if(event.x <= 241) then
             print("TOUCHED")

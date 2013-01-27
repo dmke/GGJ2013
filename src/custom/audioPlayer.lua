@@ -30,11 +30,11 @@ local handles = {
 }
 
 local config = {
-  bgMusic   = { ch = 1, src = nil, pitch = 0.9 },
-  bgHeart   = { ch = 2, src = nil }, -- shares pitch w/ bgMusic
-  powerUp   = { ch = 3 },
-  character = { ch = 4 },
-  atmo      = { ch = 5 }
+  bgMusic   = { ch=1, src=nil, pitch=0.9 },
+  bgHeart   = { ch=2, src=nil }, -- shares pitch w/ bgMusic
+  powerUp   = { ch=3 },
+  character = { ch=4 },
+  atmo      = { ch=5 }
 }
 
 local function setVolume(vol, ch)
