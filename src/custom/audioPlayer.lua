@@ -120,7 +120,16 @@ function defibrillator()
 end
 
 function flatline()
-  sfx(handles.flatline, config.character)
+  sfx(handles.flatline, config.atmo)
+  timer.performWithDelay(1500, function(event)
+    local vol = audio.getVolume(config.atmo.ch)
+    local t   = 500
+    audio.fadeOut({ channel=config.atmo.ch, time=t })
+    timer.performWithDelay(t+200, function(e)
+      audio.stop(config.atmo.ch)
+      setVolume(vol, config.atmo.ch)
+    end)
+  end)
 end
 
 function jump()

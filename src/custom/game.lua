@@ -73,9 +73,10 @@ new = function( params )
             --scoreText.text = "You loose"
             hero:prepare("dieing")
             hero:play()
+            player.flatline()
         end
     end
-    timer.performWithDelay( 1000, winConditionCheck,- 1 )
+    timer.performWithDelay(1000, winConditionCheck, -1)
 
     return gameDisplay
 end
