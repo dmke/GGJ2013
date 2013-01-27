@@ -89,10 +89,10 @@ function updateMyBackground(speed)
 	end
 	backgroundnear3.x = backgroundnear3.x - (speed/5)
 	if(backgroundnear3.x < -backGroundNearWidth/2) then
-		backgroundnear3.x = game.screenWidth + backGroundNearWidth --varianz
+		backgroundnear3.x = game.screenWidth + backGroundNearWidth
 	end
 	backgroundnear4.x = backgroundnear4.x - (speed/5)
 	if(backgroundnear4.x < -backGroundNearWidth/2) then
-		backgroundnear4.x = game.screenWidth + backGroundNearWidth --varianz
+		backgroundnear4.x = game.screenWidth + backGroundNearWidth
 	end
 end
