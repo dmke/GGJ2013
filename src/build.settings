@@ -15,16 +15,16 @@ settings =
 			UIAppFonts = 
 			{
 				"badaboom.ttf"
+			},
+			CFBundleIconFile = "icon-hdpi.png",
+			CFBundleIconFiles = {       
+				"icon-hdpi.png" ,
+				"icon-mdpi.png" ,
+				"icon-ldpi.png"
 			}
 		},
 	},
 	UIAppFonts = {
 		"badaboom.ttf"
-	},
-	CFBundleIconFile = "icon72.png",
-	CFBundleIconFiles = {       
-		"icon36.png" ,
-		"icon48.png" ,
-		"icon72.png"
 	}
 }
