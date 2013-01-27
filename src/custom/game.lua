@@ -52,7 +52,7 @@ function mainLoop()
 
 		updateMyBackground(speed/10)
 		blocks.x = -hero.x + screenWidth/4
-		particles.x = -hero.x + 100
+		particles.x = -hero.x + 320
 	end
 end
 
