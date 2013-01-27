@@ -7,7 +7,7 @@ new = function( params )
 local physics = require("physics")
 physics.start()
 physics.setGravity(0, 25)
-physics.setDrawMode("normal") -- ("hybrid") -- overlays collision outlines on normal Corona objects
+physics.setDrawMode("normal") -- ("hybrid" | "normal") -- overlays collision outlines on normal Corona objects
 
 --start background music
 local player = require("audioPlayer")
