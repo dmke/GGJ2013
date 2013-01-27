@@ -18,6 +18,7 @@ for i = 1, 8, 1 do
 	pills[i].x = 2000 
 	pills[i].y = obstacleLevel - math.random(4)
 	pills[i].name = "dynamic"
+	pills[i].sound = "brickStone"
 	physics.addBody( pills[i], { density = 3.0, friction = 0.3, bounce = 0.0} )
 	game.blocks:insert(pills[i])
 end
@@ -29,6 +30,7 @@ for i = 1, 20, 1 do
 	trash[i].x = 2000 * i + math.random(500)
 	trash[i].y = obstacleLevel
 	trash[i].name = "dynamic"
+	trash[i].sound = "trashcan"
 	physics.addBody( trash[i], "dynamic", { density = 0.3, friction = 0.7, bounce = 0.2} )
 	game.blocks:insert(trash[i])
 end
@@ -51,6 +53,7 @@ for i = 1, 10, 1 do
 	lanterns[i].x = 3000 * i + math.random(250)
 	lanterns[i].y = obstacleLevel
 	lanterns[i].name = "dynamic"
+	lanterns[i].sound = "trashcan"
 	physics.addBody( lanterns[i], "dynamic", { density = 0.6, friction = 1.0, bounce = 0.0} )
 	game.blocks:insert(lanterns[i])
 end
@@ -62,6 +65,7 @@ for i = 1, 10, 1 do
 	boxes[i].x = 2000 * i + math.random(250)
 	boxes[i].y = obstacleLevel
 	boxes[i].name = "dynamic"
+	boxes[i].sound = "woodBox" 
 	physics.addBody( boxes[i], "dynamic", { density = 0.1, friction = 0.1, bounce = 0.3} )
 	game.blocks:insert(boxes[i])
 end
@@ -73,7 +77,17 @@ for i = 1, 10, 1 do
 	cars[i].x = 6000 * i + math.random(250)
 	cars[i].y = obstacleLevel
 	cars[i].name = "dynamic"
-	physics.addBody( cars[i], "dynamic", { density = 2.0, friction = 0.1, bounce = 0.1} )
+	-- polygon body for car, starting at the front (head lamp)
+--	car_body = {65-117, 0-64,
+--	172-117, 2-64,
+				--198-117, 43-64, 
+				--228-117, 46-64,
+				--234-117, 128-64,
+				--0-117, 128-64,
+--6-117, 42-64, 
+				--56-117, 42-64
+								--}
+	physics.addBody( cars[i], "dynamic", { density = 2.0, friction = 0.1, bounce = 0.1}) --, shape=car_body} )
 	game.blocks:insert(cars[i])
 end
 
