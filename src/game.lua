@@ -27,6 +27,7 @@ local scoreText = display.newText("score: ", 0, 0, "badaboom", 60)
 scoreText:setReferencePoint(display.CenterLeftReferencePoint)
 scoreText.x = 60
 scoreText.y = 20
+
 local timeText = display.newText("time: ", 0, 0, "badaboom", 60)
 timeText:setReferencePoint(display.CenterLeftReferencePoint)
 timeText.x = 400
@@ -106,15 +107,15 @@ function finish(event)
     hero:pause()
     hero.currentFrame = 8*3
 
-	_G.gameOver = display.newImage("images/menu/gui_gameover.png")
-	_G.gameOver.name = "gameOver"
-	_G.gameOver.x = display.contentWidth/2
-	_G.gameOver.y = display.contentHeight/2
+	local gameOver = display.newImage("images/menu/gui_gameover.png")
+	gameOver.name = "gameOver"
+	gameOver.x = display.contentWidth/2
+	gameOver.y = display.contentHeight/2
 
-	revive = display.newImage("images/menu/gui_gameover_revive.png")
+	local revive = display.newImage("images/menu/gui_gameover_revive.png")
 	revive.name = "revive"
-	rev_x = display.contentWidth/2 - 300
-	rev_y = display.contentHeight/2 + 200
+	local rev_x = display.contentWidth/2 - 300
+	local rev_y = display.contentHeight/2 + 200
 	revive.x = rev_x
 	revive.y = rev_y
 	game.revive = revive
@@ -131,9 +132,8 @@ function finish(event)
         elseif event.phase == "ended" then
             revive:removeSelf()
             revive = nil
-            _G.gameOver:removeSelf()
+            gameOver:removeSelf()
             -- restart game here
-            director:changeScene("menu", "fade")
         end
 		game.revive = revive
         return true
