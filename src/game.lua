@@ -121,18 +121,19 @@ function finish(event)
 
     local function reviveButtonListener( event )
         if event.phase == "began" then
-			game.revive:removeSelf()
-			game.revive = nil
-            game.revive = display.newImage("images/menu/gui_gameover_revive_aktiv.png")
-			game.revive.x = rev_x + 20
-			game.revive.y = rev_y + 10
+			revive:removeSelf()
+			revive = nil
+            revive = display.newImage("images/menu/gui_gameover_revive_aktiv.png")
+			revive.x = rev_x + 20
+			revive.y = rev_y + 10
             player.defibrillator()
         elseif event.phase == "ended" then
-            game.revive:removeSelf()
-            game.revive = nil
+            revive:removeSelf()
+            revive = nil
             gameOver:removeSelf()
             gameOver = nil
             -- restart game here
+            os.exit()
             alive = true
         end
         return true
