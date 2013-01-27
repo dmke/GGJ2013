@@ -80,6 +80,8 @@ physics.addBody( lamp, { density = 0.0, friction = 0.0, bounce = 0.0} )
 blocks:insert(lamp)
 
 
+
+
 function mainLoop(event)
 	if(alive) then
 		updateHero()
@@ -140,6 +142,8 @@ function finish(event)
     end
 	revive:addEventListener("touch", reviveButtonListener)
 end
+
+-- game instructions
 
 --how many times to call(-1 means forever))
 timer.performWithDelay(1, mainLoop, -1)

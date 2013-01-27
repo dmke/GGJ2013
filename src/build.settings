@@ -20,5 +20,11 @@ settings =
 	},
 	UIAppFonts = {
 		"badaboom.ttf"
+	},
+	CFBundleIconFile = "icon72.png",
+	CFBundleIconFiles = {       
+		"icon36.png" ,
+		"icon48.png" ,
+		"icon72.png"
 	}
 }

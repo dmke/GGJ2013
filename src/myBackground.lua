@@ -6,6 +6,17 @@ local backGroundNearHeight = 720
 local backGroundFarWidth = 1280
 local backGroundFarHeight = 720
 
+inst =  display.newImage("images/menu/instructions.png")
+inst.x = 1280/2
+inst.y = 720/2
+
+local function instButtonListener( event )
+	inst:removeSelf()
+	return true
+end
+inst:addEventListener("touch", instButtonListener)
+
+
 --MIDGROUND
 local backgroundnear3 = display.newImage("images/midground3.png")
 backgroundnear3.x = backGroundNearWidth * 3
