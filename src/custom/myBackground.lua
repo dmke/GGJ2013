@@ -42,7 +42,6 @@ for a = 1, numBlocks, 1 do
 
   numGen = math.random(6)
 
-  print (numGen)
   if(numGen == 1 and isDone == false) then
     blockArray[a] = display.newImage("images/floor1.png")
   end
