@@ -1,6 +1,6 @@
 display.setStatusBar(display.HiddenStatusBar)
 
-local director = require("director")
+director = require("director")
 local mainGroup = display.newGroup()
 
 local main = function()
