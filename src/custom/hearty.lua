@@ -9,8 +9,8 @@ local activity = "";
 local spriteSheet = sprite.newSpriteSheet("images/dashSprite.png", 85, 85)
 local monsterSet = sprite.newSpriteSet(spriteSheet, 1, 48)
 
-sprite.add(monsterSet, "running", 1, 8, 16, 0)
-sprite.add(monsterSet, "jumping", 9, 11, 6, 0)
+sprite.add(monsterSet, "running", 1, 8, 400, 0)
+sprite.add(monsterSet, "jumping", 8, 8, 1, 1)
 sprite.add(monsterSet, "dieing", 25, 48, 50, 1)
 
 hero = sprite.newSprite(monsterSet)
