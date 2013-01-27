@@ -20,7 +20,7 @@ function spray(x, y, intensity)
   for i = 1, intensity, 1 do
     local particle = display.newImage(particles[math.random(#particles)])
     particle.x = x + math.random(2*intensity) - intensity
-    particle.y = y + math.random(2*intensity) - intensity
+    particle.y = y + math.random(2*intensity) - intensity 
     particle:rotate(math.random(90) - 45)
     sprayGroup:insert(particle)
   end

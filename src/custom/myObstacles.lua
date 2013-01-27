@@ -7,7 +7,18 @@ for i = 1, 60, 1 do
 	pills[i].x = 1000 * i + math.random(750)
 	pills[i].y = obstacleLevel
 	pills[i].name = "power_up"
-	physics.addBody( pills[i], { density = 0.0, friction = 0.1, bounce = 0, radius = 15} )
+	physics.addBody( pills[i], { density = 0.2, friction = 0.1, bounce = 0.1, radius = 15} )
+	game.blocks:insert(pills[i])
+end
+
+-- ziegel
+local pills = {}  
+for i = 1, 8, 1 do
+	pills[i] = display.newImage("images/ziegelstein1.png")
+	pills[i].x = 2000 
+	pills[i].y = obstacleLevel - math.random(4)
+	pills[i].name = "dynamic"
+	physics.addBody( pills[i], { density = 3.0, friction = 0.3, bounce = 0.0} )
 	game.blocks:insert(pills[i])
 end
 
@@ -18,7 +29,7 @@ for i = 1, 20, 1 do
 	trash[i].x = 2000 * i + math.random(500)
 	trash[i].y = obstacleLevel
 	trash[i].name = "dynamic"
-	physics.addBody( trash[i], "dynamic", { density = 1.0, friction = 0.7, bounce = 0.1} )
+	physics.addBody( trash[i], "dynamic", { density = 0.3, friction = 0.7, bounce = 0.2} )
 	game.blocks:insert(trash[i])
 end
 
@@ -40,7 +51,7 @@ for i = 1, 10, 1 do
 	lanterns[i].x = 3000 * i + math.random(250)
 	lanterns[i].y = obstacleLevel
 	lanterns[i].name = "dynamic"
-	physics.addBody( lanterns[i], "dynamic", { density = 1.0, friction = 1.0, bounce = 0.0} )
+	physics.addBody( lanterns[i], "dynamic", { density = 0.6, friction = 1.0, bounce = 0.0} )
 	game.blocks:insert(lanterns[i])
 end
 
