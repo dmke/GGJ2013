@@ -14,8 +14,8 @@ local player = require("audioPlayer")
 player.aggressor()
 
 --setup some variables that we will use to position the ground
-groundLevel = 720
-screenWidth = 1280
+groundLevel = display.contentHeight
+screenWidth = display.contentWidth
 
 speed = 5
 maxHealth = 30
@@ -23,14 +23,14 @@ health = maxHealth
 time = 0
 alive = true
 
-local scoreText = display.newText("score: ", 0, 0, "badaboom", 50)
+local scoreText = display.newText("score: ", 0, 0, "badaboom", 60)
 scoreText:setReferencePoint(display.CenterLeftReferencePoint)
 scoreText.x = 60
-scoreText.y = 60
-local timeText = display.newText("time: ", 0, 0, "badaboom", 50)
+scoreText.y = 20
+local timeText = display.newText("time: ", 0, 0, "badaboom", 60)
 timeText:setReferencePoint(display.CenterLeftReferencePoint)
-timeText.x = 60
-timeText.y = 10
+timeText.x = 400
+timeText.y = 20
 
 
 --create a new group to hold all of our physics objects
@@ -52,7 +52,7 @@ function mainLoop()
 
 		updateMyBackground(speed/10)
 		blocks.x = -hero.x + screenWidth/4
-		particles.x = -hero.x + 100
+		particles.x = -hero.x + 320
 	end
 end
 
