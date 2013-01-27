@@ -20,7 +20,6 @@ local handles = {
   woodBox       = audio.loadSound("audio/wood_box.mp3"),
   woodBreak     = audio.loadSound("audio/wood_break.mp3"),
 
-
   heartbeat = audio.loadSound("audio/heartbeat.mp3"),
   aggressor = {
     audio.loadSound("audio/music_loop_1.mp3"),
@@ -31,7 +30,7 @@ local handles = {
 
 local config = {
   bgMusic   = { ch=1, src=nil, pitch=0.9 },
-  bgHeart   = { ch=2, src=nil }, -- shares pitch w/ bgMusic
+  bgHeart   = { ch=2, src=nil, pitch=0.9 },
   powerUp   = { ch=3 },
   character = { ch=4 },
   atmo      = { ch=5 }
@@ -57,21 +56,31 @@ local function startBackgroundMusic(theme)
 
       if config.bgMusic.pitch < 1.5 and math.random(100) > 25 then
         config.bgMusic.pitch = config.bgMusic.pitch + 0.1
-        if config.bgMusic.src ~= nil and config.bgHeart.src ~= nil then
+        if config.bgMusic.src ~= nil then
           al.Source(config.bgMusic.src, al.PITCH, config.bgMusic.pitch)
-          al.Source(config.bgHeart.src, al.PITCH, config.bgMusic.pitch)
         end
       end
     end
   end
+
   local function playHeartbeat(event)
+    if event == nil then
+      config.bgHeart.pitch = 0.9
+    end
     if event == nil or event.completed then
       _, config.bgHeart.src = audio.play(handles.heartbeat, { channel=config.bgHeart.ch, onComplete=playHeartbeat })
+
+      if config.bgHeart.pitch < 1.5 and math.random(100) > 25 then
+        config.bgHeart.pitch = config.bgHeart.pitch + 0.1
+        if config.bgHeart.src ~= nil then
+          al.Source(config.bgHeart.src, al.PITCH, config.bgHeart.pitch)
+        end
+      end
     end
   end
 
   playHeartbeat()
-  playBackgroundMusic()
+  --playBackgroundMusic()
 end
 
 
