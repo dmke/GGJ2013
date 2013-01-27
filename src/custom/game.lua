@@ -41,6 +41,8 @@ require("myBackground")
 require("hearty")
 require("myObstacles")
 
+print(display.screenOriginX)
+
 function mainLoop()
 	if(alive) then
 		updateHero()
