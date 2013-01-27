@@ -16,22 +16,24 @@ local player = require("audioPlayer")
 player.aggressor()
 
 --setup some variables that we will use to position the ground
-groundMin = 420
-groundMax = 340
-groundLevel = groundMin
-speed = 5;
+groundLevel = 720
+screenWidth = 1280
+
+
+
+speed = 5
 maxHealth = 30
 health = maxHealth
 time = 0
 alive = true
 
-local scoreText = display.newText("score: ", 0, 0, "badaboom", 20)
+local scoreText = display.newText("score: ", 0, 0, "badaboom", 50)
 scoreText:setReferencePoint(display.CenterLeftReferencePoint)
-scoreText.x = 30
-scoreText.y = 30
-local timeText = display.newText("time: ", 0, 0, "badaboom", 20)
+scoreText.x = 60
+scoreText.y = 60
+local timeText = display.newText("time: ", 0, 0, "badaboom", 50)
 timeText:setReferencePoint(display.CenterLeftReferencePoint)
-timeText.x = 30
+timeText.x = 60
 timeText.y = 10
 
 

@@ -1,19 +1,31 @@
+local groundBlockSideWidth = 80
 
-local backgroundnear1 = display.newImage("images/bgnear2.png")
-backgroundnear1.x = 240
-backgroundnear1.y = 160
+local backGroundNearWidth = 300
+local backGroundNearHeight = 720
 
-local backgroundnear2 = display.newImage("images/bgnear2.png")
-backgroundnear2.x = 760
-backgroundnear2.y = 160
+local backGroundFarWidth = 1280
+local backGroundFarHeight = 720
 
-local backgroundfar = display.newImage("images/bgfar1.png")
-backgroundfar.x = 480
-backgroundfar.y = 160
---adds an image to our game centered at x and y coordinates
+--HOUSES
+local backgroundnear1 = display.newImage("images/midground1.png")
+backgroundnear1.x = backGroundNearWidth
+backgroundnear1.y = game.groundLevel - 320
+local backgroundnear2 = display.newImage("images/midground2.png")
+backgroundnear2.x = backGroundNearWidth * 2
+backgroundnear2.y = game.groundLevel - 320
+
+--SKYSCRAPER
+local backgroundfar = display.newImage("images/backgroundHousing.png")
+backgroundfar.x = backGroundFarWidth
+backgroundfar.y = game.groundLevel - 320
+local backgroundfar2 = display.newImage("images/backgroundHousing.png")
+backgroundfar2.x = backGroundFarWidth * 2
+backgroundfar2.y = game.groundLevel - 320
+
+--CLOUDS
 local backbackground = display.newImage("images/background.png")
-backbackground.x = 240
-backbackground.y = 160
+backbackground.x = 640
+backbackground.y = game.groundLevel - 320
 
 --this for loop will generate all of your ground pieces, we are going to
 --make 8 in all.
@@ -31,13 +43,13 @@ for a = 1, numBlocks, 1 do
 
 	print (numGen)
 	if(numGen == 1 and isDone == false) then
-		blockArray[a] = display.newImage("images/ground1.png")
+		blockArray[a] = display.newImage("images/floor1.png")
 		physics.addBody( blockArray[a], "static", { friction=0.1 } )
 		isDone = true
 	end
 
 	if(numGen == 2 and isDone == false) then
-		blockArray[a] = display.newImage("images/ground2.png")
+		blockArray[a] = display.newImage("images/floor2.png")
 		physics.addBody( blockArray[a], "static", { friction=0.1 } )
 		isDone = true
 	end
@@ -49,8 +61,8 @@ for a = 1, numBlocks, 1 do
 	--because a is a variable that is being changed each run we can assign
 	--values to the block based on a. In this case we want the x position to
 	--be positioned the width of a block apart.
-	blockArray[a].x = (a * 79) - 79
-	blockArray[a].y = game.groundLevel
+	blockArray[a].x = (a * groundBlockSideWidth) - groundBlockSideWidth
+	blockArray[a].y = game.groundLevel + groundBlockSideWidth
 	game.blocks:insert(blockArray[a])
 end
 
@@ -60,16 +72,16 @@ function updateMyBackground(speed)
 	--updateBackgrounds will call a function made specifically to handle the background movement
 		--far background movement
 	backgroundfar.x = backgroundfar.x - (speed/55)
-
+	backgroundfar2.x = backgroundfar2.x - (speed/55)
+	
 	--near background movement
 	backgroundnear1.x = backgroundnear1.x - (speed/5)
-	if(backgroundnear1.x < -239) then
-		backgroundnear1.x = 760
+	if(backgroundnear1.x < -backGroundNearWidth/2) then
+		backgroundnear1.x = game.screenWidth + backGroundNearWidth
 	end
-
 	backgroundnear2.x = backgroundnear2.x - (speed/5)
-	if(backgroundnear2.x < -239) then
-		backgroundnear2.x = 760
+	if(backgroundnear2.x < -backGroundNearWidth/2) then
+		backgroundnear2.x = game.screenWidth + backGroundNearWidth * 1.4 --varianz
 	end
 	--print("x: " .. ground.x)
 	--for a = 1, numBlocks, 1 do
