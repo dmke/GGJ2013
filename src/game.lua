@@ -18,7 +18,7 @@ groundLevel = display.contentHeight + display.screenOriginY/2  --FIXME android n
 screenWidth = display.contentWidth
 
 speed = 5
-maxHealth = 5
+maxHealth = 60
 health = maxHealth
 time = 0
 alive = true
