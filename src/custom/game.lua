@@ -14,8 +14,8 @@ local player = require("audioPlayer")
 player.aggressor()
 
 --setup some variables that we will use to position the ground
-groundLevel = display.contentHeight
-screenWidth = display.contentWidth
+groundLevel = display.contentHeight --+ display.screenOriginY  FIXME android nenu
+screenWidth = display.contentWidth 
 
 speed = 5
 maxHealth = 30

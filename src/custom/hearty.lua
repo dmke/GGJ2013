@@ -70,7 +70,7 @@ function touched( event )
         if(event.x > 241) then
             --print("TOUCHED")
             -- jump
-            hero:applyForce( 0, -1600, hero.x, hero.y )
+            hero:applyForce( 0, -1800, hero.x, hero.y )
             --hero:prepare("jumping")
             hero:pause()
             player.jump()
@@ -79,7 +79,7 @@ function touched( event )
         if(event.x <= 241) then
             --print("TOUCHED")
             --step back
-            hero:applyForce( 0, 400, hero.x, hero.y )
+            hero:applyForce( 0, 800, hero.x, hero.y )
             --hero:prepare("jumping")
             --hero:play()
             player.stopBackgroundMusic()
@@ -91,6 +91,6 @@ Runtime:addEventListener("touch", touched, -1)
 
 function updateHero()
 	if(game.alive) then
-		hero:applyForce( 16, 0, hero.x, hero.y )
+		hero:applyForce( 14, 0, hero.x, hero.y )
 	end
 end
