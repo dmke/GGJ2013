@@ -7,7 +7,7 @@ dashing = false
 
 local activity = "";
 -- amount of jumps (max. 2, so max. 1 jump in air)
-num_jumps = 0
+num_jumps = 2
 
 local spriteSheet = sprite.newSpriteSheet("images/dashSprite.png", 85, 85)
 local monsterSet = sprite.newSpriteSet(spriteSheet, 1, 48)
@@ -69,7 +69,7 @@ function reset_dash(event)
 end
 
 function touched(event)
-	if game.alive then
+	if game.alive and game.crashed then
 	
 		if event.phase == "began" and num_jumps < 2 then
 			if event.x > display.contentWidth/2 then
