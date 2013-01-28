@@ -1,129 +1,142 @@
-obstacleLevel = game.groundLevel - 50
-topSpawnLevel = obstacleLevel - 500
+--todo: remove unused pills
+--improve random spawn
 
+local obstacleLevel 		= game.groundLevel
+local mapWidth 				= 3000
+local minObstacleDistance 	= 500
 
--- hydrant
-local hydrant = {}  
-for i = 1, 10, 1 do
-	hydrant[i] = display.newImage("images/hydrant.png")
-	hydrant[i].x = 8000 * i + math.random(250) + 1200
-	hydrant[i].y = obstacleLevel
-	hydrant[i].name = "static"
-	physics.addBody( hydrant[i], "static", { density = 1.0, friction = 0.1, bounce = 0.1} )
-	game.blocks:insert(hydrant[i])
+local carGreenShape 	= { -50,-65, 50,-65, 100,-10, 110,60, -110,60, -100,-10 }
+local taxiShape 		= { -50,-50, 50,-50, 140,-10, 150,60, -150,60, -140, 0 	}
+local carRedShape 		= { -50,-55, 50,-55, 180,-10, 170,60, -170,60, -180,-10 }
+
+local materialHydrant 	= { density = 4.0, friction = 1.0, bounce = 0.0}
+local materialLantern	= { density = 0.6, friction = 1.0, bounce = 0.0}
+local materialTrashCan 	= { density = 0.3, friction = 0.7, bounce = 0.2} 
+local materialBox	 	= { density = 0.1, friction = 0.1, bounce = 0.3} 
+local materialBrick 	= { density = 1.0, friction = 0.3, bounce = 0.0} 
+local materialPill	 	= { density = 0.2, friction = 0.1, bounce = 0.1} --radius = 15
+local materialCarGreen 	= { density = 2.0, friction = 0.1, bounce = 0.1, shape=carGreenShape }
+local materialCarTaxi 	= { density = 2.0, friction = 0.1, bounce = 0.1, shape=taxiShape }
+local materialCarRed 	= { density = 2.0, friction = 0.1, bounce = 0.1, shape=carRedShape }
+
+function createPill(x)
+	local obstacle = display.newImage("images/pille.png")
+	obstacle.x = x
+	obstacle.y = 0
+	obstacle.name = "power_up"								
+	physics.addBody( obstacle, "dynamic", materialPill)
+	game.blocks:insert(obstacle)
+	return obstacle
 end
 
--- cars
-local carSmallShape ={ -50,-65, 50,-65, 100,-10, 110,60, -110,60, -100,-10 }
-local taxiShape 	={ -50,-50, 50,-50, 140,-10, 150,60, -150,60, -140, 0 }
-local carRedShape 	={ -50,-55, 50,-55, 180,-10, 170,60, -170,60, -180,-10 }
-
-local cars = {}  
-for i = 1, 10, 1 do
-	cars[i] = display.newImage("images/auto_gruen.png")
-	cars[i].x = 6000 * i + math.random(250) + 1200
-	cars[i].y = obstacleLevel
-	cars[i].name = "dynamic"								
-	physics.addBody( cars[i], "dynamic", { density = 2.0, friction = 0.1, bounce = 0.1 , shape=carSmallShape })
-	game.blocks:insert(cars[i])
+function createLantern(x)
+	local obstacle = display.newImage("images/laterne.png")
+	obstacle.x = x
+	obstacle.y = obstacleLevel
+	obstacle.name = "dynamic"								
+	physics.addBody( obstacle, "dynamic", materialLantern)
+	game.blocks:insert(obstacle)
+	return obstacle
 end
 
-local taxi = {}
-for i = 1, 10, 1 do
-	taxi[i] = display.newImage("images/taxi.png")
-	taxi[i].x = 5000 * i + math.random(5000) + 1200
-	taxi[i].y = obstacleLevel
-	taxi[i].name = "dynamic"
-	physics.addBody( taxi[i], "dynamic", { density = 2.0, friction = 0.1, bounce = 0.1, shape=taxiShape })
-	game.blocks:insert(taxi[i])
+function createHydrant(x)
+	local hydrant = display.newImage("images/hydrant.png")
+	hydrant.x = x
+	hydrant.y = obstacleLevel
+	hydrant.name = "dynamic"
+	physics.addBody( hydrant, "dynamic", materialHydrant)
+	game.blocks:insert(hydrant)
+	return hydrant
 end
 
-local red_car = {}
-for i = 1, 10, 1 do
-	red_car[i] = display.newImage("images/car.png")
-	red_car[i].x = 8000 * i + math.random(5000) + 1200
-	red_car[i].y = obstacleLevel
-	red_car[i].name = "dynamic"
-	physics.addBody( red_car[i], "dynamic", { density = 2.0, friction = 0.1, bounce = 0.1, shape=carRedShape })
-	game.blocks:insert(red_car[i])
+function createTrashCan(x)
+	local obstacle = display.newImage("images/trash.png")
+	obstacle.x = x
+	obstacle.y = obstacleLevel
+	obstacle.name = "dynamic"								
+	physics.addBody( obstacle, "dynamic", materialTrashCan)
+	game.blocks:insert(obstacle)
+	return obstacle
 end
 
--- lanterns
-local lanterns = {}  
-for i = 1, 10, 1 do
-	lanterns[i] = display.newImage("images/laterne.png")
-	lanterns[i].x = 3000 * i + math.random(250) + 1200
-	lanterns[i].y = obstacleLevel
-	lanterns[i].name = "dynamic"
-	lanterns[i].sound = "lantern"
-	physics.addBody( lanterns[i], "dynamic", { density = 0.6, friction = 1.0, bounce = 0.0} )
-	game.blocks:insert(lanterns[i])
+function createBox(x)
+	local obstacle = display.newImage("images/karton.png")
+	obstacle.x = x
+	obstacle.y = obstacleLevel
+	obstacle.name = "dynamic"								
+	physics.addBody( obstacle, "dynamic", materialBox)
+	game.blocks:insert(obstacle)
+	return obstacle
 end
 
--- trash cans
-local trash = {}  
-for i = 1, 20, 1 do
-	trash[i] = display.newImage("images/trash.png")
-	trash[i].x = 2000 * i + math.random(500) + 1200
-	trash[i].y = obstacleLevel
-	trash[i].name = "dynamic"
-	trash[i].sound = "trashcan"
-	physics.addBody( trash[i], "dynamic", { density = 0.3, friction = 0.7, bounce = 0.2} )
-	game.blocks:insert(trash[i])
+function createBrick(x)
+	local obstacle = display.newImage("images/ziegelstein1.png")
+	obstacle.x = x
+	obstacle.y = obstacleLevel
+	obstacle.name = "dynamic"								
+	physics.addBody( obstacle, "dynamic", materialBrick)
+	game.blocks:insert(obstacle)
+	return obstacle
 end
 
--- boxes
-local boxes = {}  
-for i = 1, 10, 1 do
-	boxes[i] = display.newImage("images/karton.png")
-	boxes[i].x = 2000 * i + math.random(250) + 1200
-	boxes[i].y = topSpawnLevel
-	boxes[i].name = "dynamic"
-	boxes[i].sound = "woodBox" 
-	physics.addBody( boxes[i], "dynamic", { density = 0.1, friction = 0.1, bounce = 0.3} )
-	game.blocks:insert(boxes[i])
+function createRandomCar(x)
+	numGen = math.random(3)
+  	if(numGen == 1) then
+    	obstacle = display.newImage("images/auto_gruen.png")
+    	physics.addBody( obstacle, "dynamic", materialCarGreen)
+  	end
+  	if(numGen == 2) then
+   		obstacle = display.newImage("images/taxi.png")
+   		physics.addBody( obstacle, "dynamic", materialCarTaxi)
+  	end
+  	if(numGen == 3) then
+   		obstacle = display.newImage("images/car.png")
+   		physics.addBody( obstacle, "dynamic", materialCarRed)
+  	end	
+	obstacle.x = x
+	obstacle.y = obstacleLevel
+	obstacle.name = "dynamic"									
+	game.blocks:insert(obstacle)
+	return obstacle
 end
 
--- ziegel
-local pills = {}  
-for i = 1, 8, 1 do
-	pills[i] = display.newImage("images/ziegelstein1.png")
-	pills[i].x = 4000  + math.random(500)
-	pills[i].y = topSpawnLevel - math.random(4)
-	pills[i].name = "dynamic"
-	pills[i].sound = "brickStone"
-	physics.addBody( pills[i], { density = 3.0, friction = 0.3, bounce = 0.0} )
-	game.blocks:insert(pills[i])
+function createRandomObstacle(x,y)
+	numGen = math.random(6)
+  	if(numGen == 1) then
+    	return createHydrant(x,y)
+  	end
+  	if(numGen <= 2) then
+   		return createRandomCar(x,y)
+  	end
+  	if(numGen <= 3) then
+   		return createLantern(x,y)
+  	end
+  	if(numGen <= 4) then
+   		return createTrashCan(x,y)
+  	end
+  	if(numGen <= 5) then
+   		return createBox(x,y)
+  	end
+    if(numGen <= 6) then
+   		return createBrick(x,y)
+  	end
 end
 
--- pills
-local pills = {}  
-for i = 1, 60, 1 do
-	pills[i] = display.newImage("images/pille.png")
-	pills[i].x = 1000 * i + math.random(750) + 1200
-	pills[i].y = topSpawnLevel
-	pills[i].name = "power_up"
-	physics.addBody( pills[i], { density = 0.2, friction = 0.1, bounce = 0.1, radius = 15} )
-	game.blocks:insert(pills[i])
-end
+local obstacles = {} 
 
--- testcode, use for random generator?
-local numBlocks = 0
-local obstacleArray = {}
-for i = 1, numBlocks, 1 do
-	isDone = false
+obstacles[1] = createHydrant(mapWidth)
+obstacles[2] = createRandomCar(mapWidth + minObstacleDistance)
+obstacles[3] = createLantern(mapWidth + minObstacleDistance + minObstacleDistance)
 
-	numGen = math.random(1)
-
-	print (numGen)
-	if(numGen == 1 and isDone == false) then
-		obstacleArray[i] = display.newImage("images/auto_gruen.png")
-		physics.addBody( obstacleArray[i], "dynamic", { density = 2.0, friction = 0.1, bounce = 0.1} )
-	end	
-	obstacleArray[i].x = 1000 * i + math.random(500) + 1200
-	obstacleArray[i].y = obstacleLevel
-	obstacleArray[i].name = "dynamic"
-	game.blocks:insert(obstacleArray[i])
-	isDone = true
-
+function updateMyObstacles()
+	local lenght = table.getn(obstacles)
+	for i = 1, lenght, 1 do
+		if(obstacles[i] ~= nil and obstacles[i].x + game.blocks.x < -minObstacleDistance) then --fixme use width instead?
+			local lastX = obstacles[i].x
+			obstacles[i]:removeSelf()
+			obstacles[i] = createRandomObstacle(lastX  +  mapWidth)
+			print("REMOVED: ")
+			createPill(lastX + mapWidth + math.random(mapWidth))
+		end
+	end
 end

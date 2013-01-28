@@ -13,8 +13,8 @@ physics.setDrawMode("normal") -- ("hybrid" | "normal") -- overlays collision out
 local player = require("audioPlayer")
 player.aggressor()
 
---setup some variables that we will use to position the ground
-groundLevel = display.contentHeight + display.screenOriginY/2  --FIXME android nenu
+--setup some variables that we will use to position ground/obstacles
+groundLevel = display.contentHeight  - 120  --FIXME letterbox crop
 screenWidth = display.contentWidth
 
 speed = 5
@@ -35,8 +35,8 @@ timeText.y = 20
 
 
 --create a new group to hold all of our physics objects
-blocks = display.newGroup()
-particles = display.newGroup()
+blocks 		= display.newGroup()
+particles 	= display.newGroup()
 
 require("myBackground")
 require("hearty")
@@ -73,15 +73,13 @@ physics.addBody( emergency, { density = 0.2, friction = 0.008, bounce = 0.0} )
 emergency:applyForce( 9000, 0, emergency.x, emergency.y )
 blocks:insert(emergency)
 
-lamp = display.newImage("images/hydrant.png")
-lamp.x = 1900
-lamp.y = obstacleLevel
-lamp.name = "hydrant"
-physics.addBody( lamp, { density = 0.0, friction = 0.0, bounce = 0.0} )
-blocks:insert(lamp)
-
-
-
+local monitorMem = function()
+    collectgarbage()
+    print( "MemUsage: " .. collectgarbage("count") )
+    local textMem = system.getInfo( "textureMemoryUsed" ) / 1000000
+    print( "TexMem:   " .. textMem )
+end
+timer.performWithDelay(1000, monitorMem, -1)
 
 function mainLoop(event)
 	if(alive) then
@@ -91,14 +89,32 @@ function mainLoop(event)
 		timeText.text = "time: " .. time
 		scoreText.text = "health: " .. health
 
+		updateMyObstacles()
 		updateMyBackground(speed/10)
 		blocks.x = -hero.x + screenWidth/4
-		particles.x = -hero.x + 320
+		particles.x = -hero.x + 320	
 	else
 		timer.pause(event.source)
 	end
 end
+timer.performWithDelay(1, mainLoop, -1)
 
+local function winConditionCheck( event )
+    time = time + 1;
+    if health > 0 then
+        health = health -1
+    end
+    if health <= 0 and alive then  -- GAME OVER
+        alive = false
+        --scoreText.text = "You loose"
+        hero:prepare("dieing")
+        hero:play()
+        player.flatline()
+		timer.performWithDelay(1000, finish, -1)
+		timer.cancel(event.source)
+    end
+end
+timer.performWithDelay(1000, winConditionCheck, -1)
 
 function finish(event)
     if alive then
@@ -143,27 +159,5 @@ function finish(event)
 	revive:addEventListener("touch", reviveButtonListener)
 end
 
--- game instructions
-
---how many times to call(-1 means forever))
-timer.performWithDelay(1, mainLoop, -1)
-
-    local function winConditionCheck( event )
-        time = time + 1;
-        if health > 0 then
-            health = health -1
-        end
-        if health < 1 and alive then  -- GAME OVER
-            alive = false
-            --scoreText.text = "You loose"
-            hero:prepare("dieing")
-            hero:play()
-            player.flatline()
-			timer.performWithDelay(1000, finish, -1)
-			timer.cancel(event.source)
-        end
-    end
-    timer.performWithDelay(1000, winConditionCheck, -1)
-
-    return gameDisplay
+return gameDisplay
 end

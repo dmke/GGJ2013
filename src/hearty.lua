@@ -31,7 +31,7 @@ local function onLocalCollision( self, event )
         --print("-> TRIGGER")
         event.other:removeSelf()
         player.powerUp()
-        if(game.health < game.maxHealth) then
+        if(game.health < game.maxHealth and game.health > 0) then
         	game.health = game.health + 1
         end
     end

@@ -6,8 +6,12 @@ local backGroundNearHeight = 720
 local backGroundFarWidth = 1280
 local backGroundFarHeight = 720
 
+local streetLevel = game.groundLevel + groundBlockSideWidth/2
+
+local numBlocks = 30
+
 inst =  display.newImage("images/menu/instructions.png")
-inst.x = 1280/2
+inst.x = game.screenWidth/2
 inst.y = 720/2
 
 local function instButtonListener( event )
@@ -16,40 +20,37 @@ local function instButtonListener( event )
 end
 inst:addEventListener("touch", instButtonListener)
 
-
 --MIDGROUND
 local backgroundnear3 = display.newImage("images/midground3.png")
 backgroundnear3.x = backGroundNearWidth * 3
-backgroundnear3.y = game.groundLevel - backGroundNearHeight/2
+backgroundnear3.y = streetLevel - backGroundNearHeight/2
 local backgroundnear1 = display.newImage("images/midground1.png")
 backgroundnear1.x = backGroundNearWidth
-backgroundnear1.y = game.groundLevel - 900/2 -- fix due to file format
+backgroundnear1.y = streetLevel - 900/2 -- fix due to file format
 local backgroundnear2 = display.newImage("images/midground2.png")
 backgroundnear2.x = backGroundNearWidth * 2
-backgroundnear2.y = game.groundLevel - backGroundNearHeight/2
+backgroundnear2.y = streetLevel - backGroundNearHeight/2
 local backgroundnear4 = display.newImage("images/midground4.png")
 backgroundnear4.x = backGroundNearWidth * 2
-backgroundnear4.y = game.groundLevel - backGroundNearHeight/2
+backgroundnear4.y = streetLevel - backGroundNearHeight/2
 local backgroundnear5 = display.newImage("images/midground5.png")
 backgroundnear5.x = backGroundNearWidth * 2+800
-backgroundnear5.y = game.groundLevel - backGroundNearHeight/2
+backgroundnear5.y = streetLevel - backGroundNearHeight/2
 
 --SKYSCRAPER
 local backgroundfar = display.newImage("images/backgroundHousing.png")
 backgroundfar.x = backGroundFarWidth
-backgroundfar.y = game.groundLevel - backGroundNearHeight/2
+backgroundfar.y = streetLevel - backGroundNearHeight/2
 local backgroundfar2 = display.newImage("images/backgroundHousing.png")
 backgroundfar2.x = backGroundFarWidth * 2
-backgroundfar2.y = game.groundLevel - backGroundNearHeight/2
+backgroundfar2.y = streetLevel - backGroundNearHeight/2
 
 --CLOUDS
 local backbackground = display.newImage("images/background.png")
 backbackground.x = 640
-backbackground.y = game.groundLevel - 320
+backbackground.y = streetLevel - 360
 
---this for loop will generate all of your ground pieces, we are going to
---make 8 in all.
-local numBlocks = 800
+--this for loop will generate all of your ground pieces
 local blockArray = {}
 for a = 1, numBlocks, 1 do
   isDone = false
@@ -79,11 +80,20 @@ for a = 1, numBlocks, 1 do
   isDone = true
   blockArray[a].name = ("static")
   blockArray[a].x = (a * groundBlockSideWidth) - groundBlockSideWidth
-  blockArray[a].y = game.groundLevel + groundBlockSideWidth/2
+  blockArray[a].y = game.groundLevel + groundBlockSideWidth
   game.blocks:insert(blockArray[a])
 end
 
 function updateMyBackground(speed)
+	--far ground blocks
+	local lenght = table.getn(blockArray)
+	for i = 1, lenght, 1 do
+		if(blockArray[i] ~= nil and blockArray[i].x + game.blocks.x < -game.screenWidth) then
+			blockArray[i].x = blockArray[i].x + game.screenWidth + game.screenWidth +  game.screenWidth 
+			print("shift block forward: ")
+		end
+	end
+
   --far background movement
   backgroundfar.x = backgroundfar.x - (speed/55)
   backgroundfar2.x = backgroundfar2.x - (speed/55)
