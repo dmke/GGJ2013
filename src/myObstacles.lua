@@ -33,7 +33,8 @@ function createLantern(x)
 	local obstacle = display.newImage("images/laterne.png")
 	obstacle.x = x
 	obstacle.y = obstacleLevel
-	obstacle.name = "dynamic"								
+	obstacle.name = "dynamic"	
+	obstacle.sound = "lantern"							
 	physics.addBody( obstacle, "dynamic", materialLantern)
 	game.blocks:insert(obstacle)
 	return obstacle
@@ -53,7 +54,8 @@ function createTrashCan(x)
 	local obstacle = display.newImage("images/trash.png")
 	obstacle.x = x
 	obstacle.y = obstacleLevel
-	obstacle.name = "dynamic"								
+	obstacle.name = "dynamic"	
+	obstacle.sound = "trashcan"								
 	physics.addBody( obstacle, "dynamic", materialTrashCan)
 	game.blocks:insert(obstacle)
 	return obstacle
@@ -63,7 +65,8 @@ function createBox(x)
 	local obstacle = display.newImage("images/karton.png")
 	obstacle.x = x
 	obstacle.y = obstacleLevel
-	obstacle.name = "dynamic"								
+	obstacle.name = "dynamic"	
+	obstacle.sound = "woodBox"								
 	physics.addBody( obstacle, "dynamic", materialBox)
 	game.blocks:insert(obstacle)
 	return obstacle
@@ -73,7 +76,8 @@ function createBrick(x)
 	local obstacle = display.newImage("images/ziegelstein1.png")
 	obstacle.x = x
 	obstacle.y = obstacleLevel
-	obstacle.name = "dynamic"								
+	obstacle.name = "dynamic"
+	obstacle.sound = "brickStone"								
 	physics.addBody( obstacle, "dynamic", materialBrick)
 	game.blocks:insert(obstacle)
 	return obstacle

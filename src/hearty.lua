@@ -35,9 +35,6 @@ local function onLocalCollision( self, event )
         end
     end
     if ( event.phase == "ended" and event.other.name and event.other.name == "dynamic" and game.alive) then
-        --print("-> TRIGGER")
-        --physics.removeBody(event.other)
-        --print("-> RUN")
         if event.other.sound == "trashcan" then
 			player.trashcan()
         elseif event.other.sound == "lantern" then
