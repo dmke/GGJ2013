@@ -23,6 +23,8 @@ function spray(x, y, intensity)
     particle.y = y + math.random(2*intensity) - intensity 
     particle:rotate(math.random(90) - 45)
     sprayGroup:insert(particle)
+	particle.name = "blood"
+	physics.addBody( particle, { density = 0.05, friction = 0.1, bounce = 0.0} )
   end
   game.particles:insert(sprayGroup)
 end

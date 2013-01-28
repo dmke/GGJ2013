@@ -24,6 +24,9 @@ hero.isFixedRotation = true
 
 local function onLocalCollision( self, event )
 	reset_dash(nil)
+	if event.other.name and event.other.name == "blood" then
+		return
+	end
 	if ( event.phase == "began" ) then
 		num_jumps = 0
 	end
