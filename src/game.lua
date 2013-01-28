@@ -40,7 +40,8 @@ particles 	= display.newGroup()
 require("myBackground")
 require("hearty")
 require("myObstacles")
-
+crashed = false
+crash_started = false
 
 
 function collidesound(event)
@@ -59,14 +60,15 @@ function emergencyCollide( self, event )
 		emergency = display.newImage("images/emergencyCrash.png")
 		emergency.x = e_x
 		emergency.y = e_y
-		physics.addBody( emergency, { density = 0.0, friction = 0.0, bounce = 0.0} )
-		blocks:insert(emergency)
+		crash_started = true
+		crashed = true
 	end
 end
 
-hero.y = game.groundLevel - 1400
-hero.x = -100
-hero:setLinearVelocity( 800, -500, hero.x, hero.y )
+hero.y = -10000
+--hero.y = game.groundLevel - 1400
+--hero.x = -1000
+--hero:setLinearVelocity( 800, -800, hero.x, hero.y )
 game.blocks:insert(hero)
 
 emergency = display.newImage("images/emergency.png")
@@ -98,8 +100,23 @@ function mainLoop(event)
 		updateMyObstacles()
 		updateMyBackground(speed/10)
 		
-		blocks.x = -hero.x + screenWidth/4
-		particles.x = -hero.x + 320	
+		if crashed then
+			blocks.x = -hero.x + screenWidth/4
+			particles.x = -hero.x + 320
+			
+			physics.addBody( emergency, { density = 0.0, friction = 0.0, bounce = 0.0} )
+			blocks:insert(emergency)
+			
+			if crash_started then
+				hero.x = e_x
+				hero.y = e_y
+				hero:setLinearVelocity( 800, -500, hero.x, hero.y )
+				crash_started = false
+			end
+		else
+			blocks.x = -emergency.x + screenWidth/4
+			particles.x = -emergency.x + 320	
+		end
 	else
 		timer.pause(event.source)
 	end
