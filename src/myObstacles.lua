@@ -9,7 +9,7 @@ local carGreenShape 	= { -50,-65, 50,-65, 100,-10, 110,60, -110,60, -100,-10 }
 local taxiShape 		= { -50,-50, 50,-50, 140,-10, 150,60, -150,60, -140, 0 	}
 local carRedShape 		= { -50,-55, 50,-55, 180,-10, 170,60, -170,60, -180,-10 }
 
-local materialHydrant 	= { density = 4.0, friction = 1.0, bounce = 0.0}
+local materialHydrant 	= { density = 8.0, friction = 1.0, bounce = 0.0}
 local materialLantern	= { density = 0.6, friction = 1.0, bounce = 0.0}
 local materialTrashCan 	= { density = 0.3, friction = 0.7, bounce = 0.2} 
 local materialBox	 	= { density = 0.1, friction = 0.1, bounce = 0.3} 
@@ -135,7 +135,7 @@ function updateMyObstacles()
 			local lastX = obstacles[i].x
 			obstacles[i]:removeSelf()
 			obstacles[i] = createRandomObstacle(lastX  +  mapWidth)
-			print("REMOVED: ")
+			--print("myObstacles -> removed object, spawned object + pill")
 			createPill(lastX + mapWidth + math.random(mapWidth))
 		end
 	end

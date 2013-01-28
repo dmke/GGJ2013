@@ -6,7 +6,7 @@ local backGroundNearHeight = 720
 local backGroundFarWidth = 1280
 local backGroundFarHeight = 720
 
-local streetLevel = game.groundLevel + groundBlockSideWidth/2
+streetLevel = game.groundLevel + groundBlockSideWidth/2
 
 local numBlocks = 30
 
@@ -90,7 +90,7 @@ function updateMyBackground(speed)
 	for i = 1, lenght, 1 do
 		if(blockArray[i] ~= nil and blockArray[i].x + game.blocks.x < -game.screenWidth) then
 			blockArray[i].x = blockArray[i].x + game.screenWidth + game.screenWidth +  game.screenWidth 
-			print("shift block forward: ")
+			--print("shift block forward: ")
 		end
 	end
 

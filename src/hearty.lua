@@ -27,11 +27,10 @@ local function onLocalCollision( self, event )
 	if ( event.phase == "began" ) then
 		num_jumps = 0
 	end
-    if ( event.phase == "began" and event.other.name and event.other.name == "power_up") then
-        --print("-> TRIGGER")
+    if (game.alive and  event.phase == "began" and event.other.name and event.other.name == "power_up") then
         event.other:removeSelf()
         player.powerUp()
-        if(game.health < game.maxHealth and game.health > 0) then
+        if(game.health < game.maxHealth) then
         	game.health = game.health + 1
         end
     end
@@ -59,14 +58,8 @@ local function onLocalCollision( self, event )
 end
 hero.collision = onLocalCollision
 hero:addEventListener( "collision", hero )
-
 hero:prepare("running")
 hero:play()
-hero.x = 0
---hero.y = game.groundLevel - 320
-hero.y = game.groundLevel - 1400
-hero:setLinearVelocity( 800, -500, hero.x, hero.y )
-game.blocks:insert(hero)
 
 function reset_dash(event)
 	if dashing then
@@ -102,10 +95,6 @@ function touched(event)
 				hero:play()
 				hero.density = 8.0
 				timer.performWithDelay(1500, reset_dash)
-				--hero:prepare("jumping")
-				--hero:play()
-				
-				--player.stopBackgroundMusic()
 			end
 		 end
 	end

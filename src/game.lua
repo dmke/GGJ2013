@@ -26,13 +26,12 @@ alive = true
 local scoreText = display.newText("score: ", 0, 0, "badaboom", 60)
 scoreText:setReferencePoint(display.CenterLeftReferencePoint)
 scoreText.x = 60
-scoreText.y = 20
+scoreText.y = 40
 
 local timeText = display.newText("time: ", 0, 0, "badaboom", 60)
 timeText:setReferencePoint(display.CenterLeftReferencePoint)
 timeText.x = 400
-timeText.y = 20
-
+timeText.y = 40
 
 --create a new group to hold all of our physics objects
 blocks 		= display.newGroup()
@@ -42,18 +41,20 @@ require("myBackground")
 require("hearty")
 require("myObstacles")
 
+
+
 function collidesound(event)
 	player.carCrash()
 	timer.cancel(event.source)
 end
--- play sound in 1.3 seconds
-timer.performWithDelay(1300, collidesound, -1)
+-- play sound with delay
+timer.performWithDelay(2500, collidesound, -1)
 
 function emergencyCollide( self, event )
-	if ( event.other.name and event.other.name == "hydrant") then
+	if ( event.other.name and event.other.name == "dynamic") then
 		e_x = emergency.x
 		e_y = emergency.y
-		emergency:applyForce( -9000, 0, emergency.x, emergency.y )
+		--emergency:setLinearVelocity(0,0)--( -9000, 0, emergency.x, emergency.y )
 		emergency:removeSelf()
 		emergency = display.newImage("images/emergencyCrash.png")
 		emergency.x = e_x
@@ -63,9 +64,14 @@ function emergencyCollide( self, event )
 	end
 end
 
+hero.y = game.groundLevel - 1400
+hero.x = -100
+hero:setLinearVelocity( 800, -500, hero.x, hero.y )
+game.blocks:insert(hero)
+
 emergency = display.newImage("images/emergency.png")
-emergency.x = 0
-emergency.y = obstacleLevel
+emergency.x = -100
+emergency.y = _G.streetLevel -100
 emergency.name = "emergency"
 emergency.collision = emergencyCollide
 emergency:addEventListener( "collision", emergency )
@@ -79,7 +85,7 @@ local monitorMem = function()
     local textMem = system.getInfo( "textureMemoryUsed" ) / 1000000
     print( "TexMem:   " .. textMem )
 end
-timer.performWithDelay(1000, monitorMem, -1)
+--timer.performWithDelay(1000, monitorMem, -1)
 
 function mainLoop(event)
 	if(alive) then
@@ -91,6 +97,7 @@ function mainLoop(event)
 
 		updateMyObstacles()
 		updateMyBackground(speed/10)
+		
 		blocks.x = -hero.x + screenWidth/4
 		particles.x = -hero.x + 320	
 	else
