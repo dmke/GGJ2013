@@ -11,6 +11,7 @@ pills on the way that prolong his life.
 
 Will he make it to the hospital? It's a matter of life and death, so hurry!
 
+Download the APK [here](https://drive.google.com/open?id=1Ry6_dGKyAngmmyFuWvyh8ZVqZs2dufBj)!
 
 ## INSTALL INSTRUCTIONS
 
